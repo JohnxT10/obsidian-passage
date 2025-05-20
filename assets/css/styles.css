@@ -1,0 +1,50 @@
+body.dark-mode {
+    background-color: #181818;
+    color: #fff;
+}
+
+body.light-mode {
+    background-color: #f8f8f8;
+    color: #222;
+}
+
+.game-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: gold;
+    margin-bottom: 20px;
+}
+
+#maze {
+    display: grid;
+    grid-template-columns: repeat(10, 40px);
+    grid-template-rows: repeat(10, 40px);
+    gap: 5px;
+    margin: 20px auto;
+}
+
+.wall {
+    background-color: #444;
+    border: 2px solid #777;
+}
+
+.light-mode .wall {
+    background-color: #ccc;
+    border: 2px solid #aaa;
+}
+
+#player {
+    background-color: black;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+}
+
+#goal {
+    background-color: gold;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+}
