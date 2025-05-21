@@ -1,11 +1,16 @@
 /* Dark mode */
 body.dark-mode {
-    --bg-color: #000000; /* Black */
-    --text-color: #C0C0C0; /* Metallic Silver */
-    --wall-bg: #444444; /* Slightly lighter gray for defined walls */
+    /* Black */
+    --bg-color: #000000; 
+    /* Metallic Silver */
+    --text-color: #C0C0C0; 
+    /* Slightly lighter gray for defined walls */
+    --wall-bg: #444444; 
     --wall-border: #777;
-    --player-bg: #FFD700; /* Yellow (Gold) */
-    --goal-bg: gold;  /* Color of the goal area */
+    /* Yellow (Gold) */
+    --player-bg: #FFD700; 
+    /* Color of the goal area */
+    --goal-bg: gold;  
 
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -13,11 +18,14 @@ body.dark-mode {
 
 /* Light mode */
 body.light-mode {
-    --bg-color: #f8f8f8; /* Soft off-white for a clean look */
-    --text-color: #333333; /* Dark gray for readability */
+    /* Soft off-white for a clean look */
+    --bg-color: #f8f8f8; 
+    /* Dark gray for readability */
+    --text-color: #333333; 
     --wall-bg: #ccc;
     --wall-border: #aaa;
-    --player-bg: #ffcc00; /* Yellow (Gold) */
+    /* Yellow (Gold) */
+    --player-bg: #ffcc00; 
     --goal-bg: gold;
 
     background-color: var(--bg-color);
@@ -32,25 +40,30 @@ body.light-mode {
 }
 
 #maze {
-    position: relative; /* This makes the player’s absolute position relative to the maze container. */
+    /* This makes the player’s absolute position relative to the maze container. */
+    position: relative; 
     display: grid;
-    grid-template-columns: repeat(10, 40px); /* Adjust columns */
-    grid-template-rows: repeat(10, 40px); /* Adjust rows */
+    /* Creates 10 columns, each 40px wide. */
+    grid-template-columns: repeat(10, 40px);
+    /* Creates 10 rows, each 40px tall. */
+    grid-template-rows: repeat(10, 40px); 
     gap: 5px;
     width: fit-content;
     margin: auto;
     background-color: var(--bg-color);
-    padding: 10px;
+    padding: 9px 8px;
     border: 4px solid var(--text-color);
 }
 
-
+/* targets the class set in Javascript (layout section) */
 .wall {
     background-color: var(--wall-bg);
     border: 2px solid var(--wall-border);
 }
 
+/* targets the ID set in Javascript */
 #player {
+    position: absolute;
     background-color: var(--player-bg);
     width: 40px;
     height: 40px;
@@ -58,6 +71,7 @@ body.light-mode {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
 }
 
+/* targets the ID set in Javascript */
 #goal {
     background-color: var(--goal-bg);
     width: 40px;

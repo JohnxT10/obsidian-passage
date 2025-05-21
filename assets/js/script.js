@@ -13,6 +13,11 @@ btn.addEventListener("click", function() {
     }
 });
 
+
+
+
+// Layout of the maze
+
 // Finds the HTML element with id="maze" to put the maze grid inside.
 const mazeContainer = document.getElementById("maze");
 
@@ -55,27 +60,60 @@ mazeLayout.forEach((row, rowIndex) => {
     });
 });
 
-// These variables track the player's position in the maze grid.
-let playerRow = 1; // Start position (row in mazeLayout)
-let playerCol = 1; // Start position (col in mazeLayout)
 
-// The size of each cell, including the gap between cells.
-const cellSize = 40 + 5; // 40px cell + 5px gap (from CSS grid gap)
 
-// Finds the player element in the HTML.
-const player = document.getElementById("player");
+// CSS Variables for cell size and gap
+// These variables are used to calculate the position of the player and goal.
 
-// Places the player at the correct spot in the maze using absolute positioning.
+// cell size in px
+const cellSize = 40; 
+// gap in px
+const gap = 5;       
+// px, from the CSS file
+const mazePadding = 5; 
+const mazeBorder = 4;   
+
+function getCellPosition(index) {
+    // So that the player and goal are positioned correctly.
+    return   mazeBorder + gap + index * (cellSize + gap); 
+}
+
+
+// Create the player and goal elements section
+
+// Define player and goal positions BEFORE creating the elements
+
+// Start position (must be a path)
+let playerRow = 1, playerCol = 1; 
+// End position (must be a path)
+const goalRow = 8, goalCol = 8;   
+
+// Create and position the player
+const player = document.createElement("div");
+player.id = "player";
 player.style.position = "absolute";
-player.style.top = playerRow * cellSize + "px";
-player.style.left = playerCol * cellSize + "px";
+player.style.top = getCellPosition(playerRow) + "px";
+player.style.left = getCellPosition(playerCol) + "px";
+mazeContainer.appendChild(player);
+
+// Create and position the goal
+const goal = document.createElement("div");
+goal.id = "goal";
+goal.style.position = "absolute";
+goal.style.top = getCellPosition(goalRow) + "px";
+goal.style.left = getCellPosition(goalCol) + "px";
+mazeContainer.appendChild(goal);
+
+
+
+
+// Movement Logic
 
  // Listens for any key press.
 document.addEventListener("keydown", function(event) {
    // Copies the current player position.
     let newRow = playerRow;
-    let newCol = playerCol;
-    
+    let newCol = playerCol;  
 // Changes newRow/newCol depending on which arrow key was pressed.
     switch (event.key) {
         case "ArrowUp":
@@ -107,8 +145,8 @@ document.addEventListener("keydown", function(event) {
         // Updates the player's position in the grid and on the screen.
         playerRow = newRow;
         playerCol = newCol;
-        player.style.top = playerRow * cellSize + "px";
-        player.style.left = playerCol * cellSize + "px";
+        player.style.top = getCellPosition(playerRow) + "px";
+        player.style.left = getCellPosition(playerCol) + "px";
         
     }
 });
