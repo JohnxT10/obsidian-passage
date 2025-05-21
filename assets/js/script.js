@@ -70,7 +70,6 @@ const cellSize = 40;
 // gap in px
 const gap = 5;       
 // px, from the CSS file
-const mazePadding = 5; 
 const mazeBorder = 4;   
 
 function getCellPosition(index) {
