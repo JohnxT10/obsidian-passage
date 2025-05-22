@@ -49,7 +49,10 @@ mazeLayout.forEach((row, rowIndex) => {
         if (cell === 1) {
             // If the cell is a wall, add the "wall" class.
             cellDiv.classList.add("wall");
-            
+            // Add a slim inner wall bar
+            const wallBar = document.createElement("div");
+            wallBar.className = "wall-bar";
+            cellDiv.appendChild(wallBar);
         } else {
              // If the cell is a path, add the "path" class.
             cellDiv.classList.add("path");
