@@ -11,6 +11,11 @@ btn.addEventListener("click", function() {
     } else {
         btn.textContent = "Light Mode";
     }
+
+       // Redraw the maze with the new color
+       if (draw && typeof draw.redrawMaze === "function") {
+        draw.redrawMaze(cellSize);
+      }
 });
 
 
@@ -225,6 +230,11 @@ function rand(max) {
     defineStartEnd();
     defineMaze();
   }
+
+  // Get the current wall color from the CSS variable
+  function getWallColor() {
+    return getComputedStyle(document.body).getPropertyValue('--maze-wall-color').trim();
+  }
   
   function DrawMaze(Maze, ctx, cellsize, endSprite = null) {
     var map = Maze.map();
@@ -270,6 +280,7 @@ function rand(max) {
     }
   
     function drawMap() {
+        ctx.strokeStyle = getWallColor(); 
       for (x = 0; x < map.length; x++) {
         for (y = 0; y < map[x].length; y++) {
           drawCell(x, y, map[x][y]);
