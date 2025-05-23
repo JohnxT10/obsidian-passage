@@ -1,5 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
+body.dark-mode {
+    /* Black */
+    --bg-color: #000000; 
+    /* Metallic Silver */
+    --text-color: #C0C0C0; 
+    /* Slightly lighter gray for defined walls */
+    --wall-bg: #444444; 
+    --wall-border: #777;
+    /* Yellow (Gold) */
+    --player-bg: #FFD700; 
+    /* Color of the goal area */
+    --goal-bg: gold;  
+
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* Light mode */
+body.light-mode {
+    /* Soft off-white for a clean look */
+    --bg-color: #f8f8f8; 
+    /* Dark gray for readability */
+    --text-color: #333333; 
+    --wall-bg: #ccc;
+    --wall-border: #aaa;
+    /* Yellow (Gold) */
+    --player-bg: #ffcc00; 
+    --goal-bg: gold;
+
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
 html, body {
     width: 100vw;
     height: 100vh;
