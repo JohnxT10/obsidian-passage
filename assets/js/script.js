@@ -527,17 +527,28 @@ function rand(max) {
   var cellSize;
   var difficulty;
   // sprite.src = 'media/sprite.png';
-  
-  window.onload = function() {
+
+
+ function resizeCanvasAndMaze() {
     let viewWidth = $("#view").width();
     let viewHeight = $("#view").height();
-    if (viewHeight < viewWidth) {
-      ctx.canvas.width = viewHeight - viewHeight / 100;
-      ctx.canvas.height = viewHeight - viewHeight / 100;
-    } else {
-      ctx.canvas.width = viewWidth - viewWidth / 100;
-      ctx.canvas.height = viewWidth - viewWidth / 100;
+    // Set a maximum size in pixels (e.g., 600)
+    let maxSize = 600;
+    let size = Math.min(viewWidth, viewHeight * 0.95, maxSize);
+    ctx.canvas.width = size;
+    ctx.canvas.height = size;
+    if (typeof difficulty !== "undefined") {
+        cellSize = mazeCanvas.width / difficulty;
+        if (player != null && draw != null) {
+            draw.redrawMaze(cellSize);
+            player.redrawPlayer(cellSize);
+        }
     }
+}
+
+  
+  window.onload = function() {
+    resizeCanvasAndMaze();
   
     //Load and edit sprites
     var completeOne = false;
@@ -578,22 +589,7 @@ function rand(max) {
     
   };
   
-  window.onresize = function() {
-    let viewWidth = $("#view").width();
-    let viewHeight = $("#view").height();
-    if (viewHeight < viewWidth) {
-      ctx.canvas.width = viewHeight - viewHeight / 100;
-      ctx.canvas.height = viewHeight - viewHeight / 100;
-    } else {
-      ctx.canvas.width = viewWidth - viewWidth / 100;
-      ctx.canvas.height = viewWidth - viewWidth / 100;
-    }
-    cellSize = mazeCanvas.width / difficulty;
-    if (player != null) {
-      draw.redrawMaze(cellSize);
-      player.redrawPlayer(cellSize);
-    }
-  };
+  window.onresize = resizeCanvasAndMaze;
   
   function makeMaze() {
     if (player != undefined) {

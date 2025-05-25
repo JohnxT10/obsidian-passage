@@ -3,26 +3,30 @@
 body.dark-mode {
     /* Black */
     --bg-color: #181818;
+    --bg-gradient-top: #232323;   /* Brighter at the top */
+    --bg-gradient-bottom: #181818; /* Darker at the bottom */
     /* Metallic Silver */
     --text-color: #C0C0C0; 
     /* Light gray for dark mode */
     --maze-wall-color: #C0C0C0; 
 
-    background-color: var(--bg-color);
+    background: linear-gradient(to bottom, var(--bg-gradient-top), var(--bg-gradient-bottom));
     color: var(--text-color);
 }
 
 /* Light mode */
 body.light-mode {
     /* Soft off-white for a clean look */
-    --bg-color: #f8f8f8; 
+    --bg-color: #f5f5f5; 
+    --bg-gradient-top: #e0e0e0;   /* Brighter at the top */
+    --bg-gradient-bottom: #cccccc; /* Slightly darker at the bottom */
     /* Dark gray for readability */
-    --text-color: #333333; 
+    --text-color: #181818;
     /* Dark gray for light mode */
-    --maze-wall-color: #333333; 
+    --maze-wall-color: #181818;
   
 
-    background-color: var(--bg-color);
+    background: linear-gradient(to bottom, var(--bg-gradient-top), var(--bg-gradient-bottom));
     color: var(--text-color);
 }
 
@@ -42,7 +46,7 @@ html, body {
 
 .game-title {
     display: block;
-    margin-bottom: 24px;
+    margin-top: 50px;
     font-size: 2.5rem;
     font-weight: bold;
     text-align: center;
@@ -56,14 +60,20 @@ html, body {
     top: 15px;
     opacity: 1;
     display: inline-block;
-    margin: auto;
+    margin: 0 auto;
     border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
 }
-#mazeContainer #mazeCanvas {
+#mazeCanvas {
     margin: 0;
     display: block;
     border: solid 2px black;
-    height: 400px;
+    width: 100%;
+    height: auto;
+    max-width: 500px;
+    /* Prevents it from being too tall on mobile */
+    max-height: 60vh;
 }
 input, select {
     cursor: pointer;
@@ -141,11 +151,7 @@ input:focus, select:focus {
     font-size: 3.2rem;
 }
 #page #view {
-    position: absolute;
-    top: 65px;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    margin-top: 30px; /* or whatever spacing you want */
     width: 100%;
     height: auto;
 }
@@ -162,13 +168,12 @@ input:focus, select:focus {
     margin: 0 auto;
     width: 100%;
     text-align: center;
-    background: rgba(255,255,255,0.95); /* Optional: subtle background */
     padding: 16px 0 12px 0;
     font-size: 1.2rem;
     z-index: 10;
 }
  
-/* Extra small devices (phones, 600px and down) */
+/* Extra small devices (phones, 400px and down) */
 @media only screen and (max-width: 400px) {
 	input, select {
 	    width: 120px;
