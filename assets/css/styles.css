@@ -1,15 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-
 body.dark-mode {
     /* Black */
     --bg-color: #181818;
-    --bg-gradient-top: #232323;   /* Brighter at the top */
-    --bg-gradient-bottom: #181818; /* Darker at the bottom */
+    /* Brighter grey at the top */
+    --bg-gradient-top: #232323;   
+    /* Darker grey at the bottom */
+    --bg-gradient-bottom: #181818; 
     /* Metallic Silver */
     --text-color: #C0C0C0; 
     /* Light gray for dark mode */
     --maze-wall-color: #C0C0C0; 
-
+    
     background: linear-gradient(to bottom, var(--bg-gradient-top), var(--bg-gradient-bottom));
     color: var(--text-color);
 }
@@ -18,8 +18,10 @@ body.dark-mode {
 body.light-mode {
     /* Soft off-white for a clean look */
     --bg-color: #f5f5f5; 
-    --bg-gradient-top: #e0e0e0;   /* Brighter at the top */
-    --bg-gradient-bottom: #cccccc; /* Slightly darker at the bottom */
+    /* Brighter grey at the top */
+    --bg-gradient-top: #e0e0e0;   
+    /* Slightly darker grey at the bottom */
+    --bg-gradient-bottom: #cccccc; 
     /* Dark gray for readability */
     --text-color: #181818;
     /* Dark gray for light mode */
@@ -41,14 +43,13 @@ html, body {
     left: 0;
     right: 0;
     background-color: #fff;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Cinzel', 'EB Garamond', serif;
 }
 
 .game-title {
     display: block;
     margin-top: 50px;
     font-size: 2.5rem;
-    font-weight: bold;
     text-align: center;
 }
 
@@ -178,4 +179,8 @@ input:focus, select:focus {
 	input, select {
 	    width: 120px;
 	}
+}
+
+* {
+    font-family: 'Cinzel', 'EB Garamond', serif !important;
 }

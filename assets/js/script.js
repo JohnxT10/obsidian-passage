@@ -290,33 +290,6 @@ function rand(max) {
       }
     }
   
-    function drawEndFlag() {
-      var coord = Maze.endCoord();
-      var gridSize = 4;
-      var fraction = cellSize / gridSize - 2;
-      var colorSwap = true;
-      for (let y = 0; y < gridSize; y++) {
-        if (gridSize % 2 == 0) {
-          colorSwap = !colorSwap;
-        }
-        for (let x = 0; x < gridSize; x++) {
-          ctx.beginPath();
-          ctx.rect(
-            coord.x * cellSize + x * fraction + 4.5,
-            coord.y * cellSize + y * fraction + 4.5,
-            fraction,
-            fraction
-          );
-          if (colorSwap) {
-            ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
-          } else {
-            ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
-          }
-          ctx.fill();
-          colorSwap = !colorSwap;
-        }
-      }
-    }
   
         function drawEndFlag() {
       var coord = Maze.endCoord();
@@ -332,25 +305,17 @@ function rand(max) {
       ctx.restore();
     }
   
-    function clear() {
-      var canvasSize = cellSize * map.length;
-      ctx.clearRect(0, 0, canvasSize, canvasSize);
-    }
   
        drawEndMethod = drawEndFlag;
-    clear();
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     drawMap();
     drawEndMethod();
   }
   
   function Player(maze, c, _cellsize, onComplete, sprite = null) {
     var ctx = c.getContext("2d");
-    var drawSprite;
+    var drawSprite = drawSpriteCircle; // Always use the circle
     var moves = 0;
-    drawSprite = drawSpriteCircle;
-    if (sprite != null) {
-      drawSprite = drawSpriteImg;
-    }
     var player = this;
     var map = maze.map();
     var cellCoords = {
@@ -359,10 +324,11 @@ function rand(max) {
     };
     var cellSize = _cellsize;
     var halfCellSize = cellSize / 2;
-  
+
     this.redrawPlayer = function(_cellsize) {
       cellSize = _cellsize;
-      drawSpriteImg(cellCoords);
+      halfCellSize = cellSize / 2;
+      drawSprite(cellCoords);
     };
   
     function drawSpriteCircle(coord) {
@@ -376,26 +342,6 @@ function rand(max) {
         2 * Math.PI
       );
       ctx.fill();
-      if (coord.x === maze.endCoord().x && coord.y === maze.endCoord().y) {
-        onComplete(moves);
-        player.unbindKeyDown();
-      }
-    }
-  
-    function drawSpriteImg(coord) {
-      var offsetLeft = cellSize / 50;
-      var offsetRight = cellSize / 25;
-      ctx.drawImage(
-        sprite,
-        0,
-        0,
-        sprite.width,
-        sprite.height,
-        coord.x * cellSize + offsetLeft,
-        coord.y * cellSize + offsetLeft,
-        cellSize - offsetRight,
-        cellSize - offsetRight
-      );
       if (coord.x === maze.endCoord().x && coord.y === maze.endCoord().y) {
         onComplete(moves);
         player.unbindKeyDown();
@@ -510,7 +456,6 @@ function rand(max) {
     };
   
     drawSprite(maze.startCoord());
-  
     this.bindKeyDown();
   }
   
@@ -544,44 +489,6 @@ function rand(max) {
   
   window.onload = function() {
     resizeCanvasAndMaze();
-  
-    //Load and edit sprites
-    var completeOne = false;
-    var completeTwo = false;
-    var isComplete = () => {
-      if(completeOne === true && completeTwo === true)
-         {
-           console.log("Runs");
-           setTimeout(function(){
-             makeMaze();
-           }, 500);         
-         }
-    };
-    sprite = new Image();
-    sprite.src =
-      "assets/images/key.webp" +
-      "?" +
-      new Date().getTime();
-    sprite.setAttribute("crossOrigin", " ");
-    sprite.onload = function() {
-      sprite = changeBrightness(1.2, sprite);
-      completeOne = true;
-      console.log(completeOne);
-      isComplete();
-    };
-  
-    finishSprite = new Image();
-    finishSprite.src = "assets/images/amberley.jpg?"+
-    "?" +
-    new Date().getTime();
-    finishSprite.setAttribute("crossOrigin", " ");
-    finishSprite.onload = function() {
-      finishSprite = changeBrightness(1.1, finishSprite);
-      completeTwo = true;
-      console.log(completeTwo);
-      isComplete();
-    };
-    
   };
   
   window.onresize = resizeCanvasAndMaze;
@@ -595,6 +502,6 @@ function rand(max) {
     difficulty = e.options[e.selectedIndex].value;
     cellSize = mazeCanvas.width / difficulty;
     maze = new Maze(difficulty, difficulty);
-    draw = new DrawMaze(maze, ctx, cellSize, finishSprite);
-    player = new Player(maze, mazeCanvas, cellSize, displayVictoryMess, sprite);
+    draw = new DrawMaze(maze, ctx, cellSize);
+    player = new Player(maze, mazeCanvas, cellSize, displayVictoryMess);
   }
