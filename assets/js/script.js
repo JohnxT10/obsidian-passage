@@ -252,6 +252,7 @@ function rand(max) {
     function drawCell(xCord, yCord, cell) {
       var x = xCord * cellSize;
       var y = yCord * cellSize;
+    // This adjusts the thickness of the lines.
       ctx.lineWidth = 2;
   
       if (cell.n == false) {
