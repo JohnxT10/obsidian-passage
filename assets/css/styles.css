@@ -129,8 +129,10 @@ select {
 /* Layout Containers */
 #page {
     text-align: center;
-    min-height: 100vh;      /* Ensure the page fills the viewport */
-    display: flex;          /* Enable flexbox */
+    /* Ensure the page fills the viewport */
+    min-height: 100vh;    
+    /* Enable flexbox */  
+    display: flex;          
     flex-direction: column;
 }
 #menu {
@@ -150,6 +152,7 @@ select {
     text-align: center;
     padding: 16px 0 12px 0;
     font-size: 1.2rem;
+    /* Pushes instructions to the bottom */
     margin-top: auto;
 }
 
