@@ -1,42 +1,73 @@
-/* Theme Variables */
+/* 1. Dark mode theme variables and background */
 body.dark-mode {
+    /* Black */
     --bg-color: #181818;
-    --bg-gradient-top: #232323;
-    --bg-gradient-bottom: #181818;
-    --text-color: #C0C0C0;
-    --maze-wall-color: #C0C0C0;
+    /* Brighter grey at the top */
+    --bg-gradient-top: #232323;   
+    /* Darker grey at the bottom */
+    --bg-gradient-bottom: #181818; 
+    /* Metallic Silver */
+    --text-color: #C0C0C0; 
+    /* Light gray for dark mode */
+    --maze-wall-color: #C0C0C0; 
+    
     background: linear-gradient(to bottom, var(--bg-gradient-top), var(--bg-gradient-bottom));
     color: var(--text-color);
 }
 
+/* Light mode theme variables and background */
 body.light-mode {
-    --bg-color: #f5f5f5;
-    --bg-gradient-top: #e0e0e0;
-    --bg-gradient-bottom: #cccccc;
+    /* Soft off-white for a clean look */
+    --bg-color: #f5f5f5; 
+    /* Brighter grey at the top */
+    --bg-gradient-top: #e0e0e0;   
+    /* Slightly darker grey at the bottom */
+    --bg-gradient-bottom: #cccccc; 
+    /* Dark gray for readability */
     --text-color: #181818;
+    /* Dark gray for light mode */
     --maze-wall-color: #181818;
+  
     background: linear-gradient(to bottom, var(--bg-gradient-top), var(--bg-gradient-bottom));
     color: var(--text-color);
 }
 
-/* Basic Resets */
+/* 2. Basic Resets and Typography */
 body {
     margin: 0;
     padding: 0;
 }
 
-/* Typography */
+
 * {
     font-family: 'Cinzel', 'EB Garamond', serif !important;
 }
 
-/* Game Title */
+/* 3. Layout Containers */
+#page {
+    text-align: center;
+    /* Ensure the page fills the viewport */
+    min-height: 100vh;    
+    /* Enable flexbox */  
+    display: flex;          
+    flex-direction: column;
+}
+#menu {
+    margin: auto;
+    padding: 10px;
+    height: 65px;
+    box-sizing: border-box;
+    
+
+/* 4. Game Title */
 .game-title {
     display: block;
     margin-top: 50px;
     font-size: 2.5rem;
     text-align: center;
 }
+
+/* 5. Maze View, Container and Canvas */
 
 /* Maze View */
 #view {
@@ -45,6 +76,7 @@ body {
     height: auto;
 }
 
+/* Maze Container */
 #mazeContainer {
     top: 15px;
     opacity: 1;
@@ -55,17 +87,17 @@ body {
     max-width: 500px;
 }
 
+/* Maze Canvas */
 #mazeCanvas {
     margin: 0;
     display: block;
-    border: solid 2px black;
     width: 100%;
     height: auto;
     max-width: 500px;
     max-height: 60vh;
 }
 
-/* Form Elements */
+/* 6. Form Elements */
 input, select {
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.30);
@@ -101,7 +133,7 @@ select {
     background-position: 125px center;
 }
 
-/* Message Overlay */
+/* 7. Message Overlay */
 #Message-Container {
     visibility: hidden;
     color: white;
@@ -126,27 +158,7 @@ select {
     margin-top: -150px;
 }
 
-/* Layout Containers */
-#page {
-    text-align: center;
-    /* Ensure the page fills the viewport */
-    min-height: 100vh;    
-    /* Enable flexbox */  
-    display: flex;          
-    flex-direction: column;
-}
-#menu {
-    margin: auto;
-    padding: 10px;
-    height: 65px;
-    box-sizing: border-box;
-}
-.border {
-    border: 10px black solid;
-    border-radius: 10px;
-}
-
-/* Instructions Bar */
+/* 8. Instructions Bar */
 #instructions {
     width: 100%;
     text-align: center;
@@ -156,8 +168,9 @@ select {
     margin-top: auto;
 }
 
-/* Responsive: Extra small devices */
+/* 9. Responsive: Extra small devices */
 @media only screen and (max-width: 400px) {
+    /* For the difficulty and start button */
     input, select {
         width: 120px;
     }
