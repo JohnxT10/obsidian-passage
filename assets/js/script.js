@@ -252,6 +252,7 @@ function rand(max) {
     function drawCell(xCord, yCord, cell) {
       var x = xCord * cellSize;
       var y = yCord * cellSize;
+      ctx.lineWidth = 2;
   
       if (cell.n == false) {
         ctx.beginPath();
@@ -564,7 +565,7 @@ function rand(max) {
     };
     sprite = new Image();
     sprite.src =
-      "./key.png" +
+      "assets/images/key.webp" +
       "?" +
       new Date().getTime();
     sprite.setAttribute("crossOrigin", " ");
@@ -576,7 +577,7 @@ function rand(max) {
     };
   
     finishSprite = new Image();
-    finishSprite.src = "./home.png"+
+    finishSprite.src = "assets/images/amberley.jpg?"+
     "?" +
     new Date().getTime();
     finishSprite.setAttribute("crossOrigin", " ");
