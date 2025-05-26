@@ -1,51 +1,36 @@
+/* Theme Variables */
 body.dark-mode {
-    /* Black */
     --bg-color: #181818;
-    /* Brighter grey at the top */
-    --bg-gradient-top: #232323;   
-    /* Darker grey at the bottom */
-    --bg-gradient-bottom: #181818; 
-    /* Metallic Silver */
-    --text-color: #C0C0C0; 
-    /* Light gray for dark mode */
-    --maze-wall-color: #C0C0C0; 
-    
+    --bg-gradient-top: #232323;
+    --bg-gradient-bottom: #181818;
+    --text-color: #C0C0C0;
+    --maze-wall-color: #C0C0C0;
     background: linear-gradient(to bottom, var(--bg-gradient-top), var(--bg-gradient-bottom));
     color: var(--text-color);
 }
 
-/* Light mode */
 body.light-mode {
-    /* Soft off-white for a clean look */
-    --bg-color: #f5f5f5; 
-    /* Brighter grey at the top */
-    --bg-gradient-top: #e0e0e0;   
-    /* Slightly darker grey at the bottom */
-    --bg-gradient-bottom: #cccccc; 
-    /* Dark gray for readability */
+    --bg-color: #f5f5f5;
+    --bg-gradient-top: #e0e0e0;
+    --bg-gradient-bottom: #cccccc;
     --text-color: #181818;
-    /* Dark gray for light mode */
     --maze-wall-color: #181818;
-  
-
     background: linear-gradient(to bottom, var(--bg-gradient-top), var(--bg-gradient-bottom));
     color: var(--text-color);
 }
 
-html, body {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    padding: 0;
+/* Basic Resets */
+body {
     margin: 0;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #fff;
-    font-family: 'Cinzel', 'EB Garamond', serif;
+    padding: 0;
 }
 
+/* Typography */
+* {
+    font-family: 'Cinzel', 'EB Garamond', serif !important;
+}
+
+/* Game Title */
 .game-title {
     display: block;
     margin-top: 50px;
@@ -53,8 +38,11 @@ html, body {
     text-align: center;
 }
 
+/* Maze View */
 #view {
     margin-top: 30px;
+    width: 100%;
+    height: auto;
 }
 
 #mazeContainer {
@@ -66,6 +54,7 @@ html, body {
     width: 90%;
     max-width: 500px;
 }
+
 #mazeCanvas {
     margin: 0;
     display: block;
@@ -73,9 +62,10 @@ html, body {
     width: 100%;
     height: auto;
     max-width: 500px;
-    /* Prevents it from being too tall on mobile */
     max-height: 60vh;
 }
+
+/* Form Elements */
 input, select {
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.30);
@@ -92,24 +82,26 @@ input, select {
     appearance: none;
 }
 input:hover, select:hover {
-	background-color: rgba(0, 0, 0, 0.70);
+    background-color: rgba(0, 0, 0, 0.70);
 }
 input:active, select:active {
-	background-color: black;
+    background-color: black;
 }
 input:focus, select:focus {
-	outline: none;
+    outline: none;
 }
 .custom-select {
-	display: inline-block;
+    display: inline-block;
 }
-.custom-select select {
+select {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     background-repeat: no-repeat;
     background-position: 125px center;
 }
+
+/* Message Overlay */
 #Message-Container {
     visibility: hidden;
     color: white;
@@ -124,7 +116,7 @@ input:focus, select:focus {
     background-color: rgba(0, 0, 0, 0.30);
     z-index: 1;
 }
-#Message-Container #message {
+#message {
     width: 300px;
     height: 300px;
     position: fixed;
@@ -133,54 +125,36 @@ input:focus, select:focus {
     margin-left: -150px;
     margin-top: -150px;
 }
+
+/* Layout Containers */
 #page {
-	text-align: center;
-	height: auto;
-	width: auto;
-	margin: auto;
+    text-align: center;
+    height: 100vh;
+    width: auto;
+    margin: auto;
 }
-#page #menu {
+#menu {
     margin: auto;
     padding: 10px;
     height: 65px;
     box-sizing: border-box;
-}
-#page #menu h1 {
-    margin: 0;
-    margin-bottom: 10px;
-    font-weight: 600;
-    font-size: 3.2rem;
-}
-#page #view {
-    margin-top: 30px; /* or whatever spacing you want */
-    width: 100%;
-    height: auto;
 }
 .border {
     border: 10px black solid;
     border-radius: 10px;
 }
 
+/* Instructions Bar */
 #instructions {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: 0 auto;
     width: 100%;
     text-align: center;
     padding: 16px 0 12px 0;
     font-size: 1.2rem;
-    z-index: 10;
-}
- 
-/* Extra small devices (phones, 400px and down) */
-@media only screen and (max-width: 400px) {
-	input, select {
-	    width: 120px;
-	}
 }
 
-* {
-    font-family: 'Cinzel', 'EB Garamond', serif !important;
+/* Responsive: Extra small devices */
+@media only screen and (max-width: 400px) {
+    input, select {
+        width: 120px;
+    }
 }
