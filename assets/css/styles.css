@@ -57,7 +57,7 @@ body {
     padding: 10px;
     height: 65px;
     box-sizing: border-box;
-    
+}
 
 /* 4. Game Title */
 .game-title {
@@ -134,7 +134,7 @@ select {
 }
 
 /* 7. Message Overlay */
-#Message-Container {
+#message-container {
     visibility: hidden;
     color: white;
     display: block;

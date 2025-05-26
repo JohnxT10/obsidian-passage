@@ -55,7 +55,7 @@ function rand(max) {
   
   function displayVictoryMess(moves) {
     document.getElementById("moves").innerHTML = "You Moved " + moves + " Steps.";
-    toggleVisablity("Message-Container");  
+    toggleVisablity("message-container");  
   }
   
   function toggleVisablity(id) {
