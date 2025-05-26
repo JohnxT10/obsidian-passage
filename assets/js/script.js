@@ -318,21 +318,18 @@ function rand(max) {
       }
     }
   
-    function drawEndSprite() {
-      var offsetLeft = cellSize / 50;
-      var offsetRight = cellSize / 25;
+        function drawEndFlag() {
       var coord = Maze.endCoord();
-      ctx.drawImage(
-        endSprite,
-        2,
-        2,
-        endSprite.width,
-        endSprite.height,
-        coord.x * cellSize + offsetLeft,
-        coord.y * cellSize + offsetLeft,
-        cellSize - offsetRight,
-        cellSize - offsetRight
+      var offset = cellSize / 6;
+      ctx.save();
+      ctx.fillStyle = "#ff5252"; // bright red
+      ctx.fillRect(
+        coord.x * cellSize + offset,
+        coord.y * cellSize + offset,
+        cellSize - 2 * offset,
+        cellSize - 2 * offset
       );
+      ctx.restore();
     }
   
     function clear() {
@@ -340,11 +337,7 @@ function rand(max) {
       ctx.clearRect(0, 0, canvasSize, canvasSize);
     }
   
-    if (endSprite != null) {
-      drawEndMethod = drawEndSprite;
-    } else {
-      drawEndMethod = drawEndFlag;
-    }
+       drawEndMethod = drawEndFlag;
     clear();
     drawMap();
     drawEndMethod();
