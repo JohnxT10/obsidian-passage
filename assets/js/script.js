@@ -19,13 +19,15 @@ btn.addEventListener("click", function() {
 });
 
 // Set your desired time limit in seconds
-let timeLimit = 60; // 60 seconds
+let timeLimit = 1; // 60 seconds
 let timeRemaining = timeLimit;
 let timerInterval = null;
 let mazeActive = false;
 
 // Call this when the maze starts
 function startTimer() {
+    /* When start button is pressed the interval are the same and 
+    not going down faster */
     clearInterval(timerInterval);
     timeRemaining = timeLimit;
     document.getElementById('time-remaining').textContent = timeRemaining;
@@ -50,11 +52,13 @@ function stopTimer() {
 
 // Show failure message
 function showFailureMessage() {
-    document.getElementById('message').innerHTML = `
+    const messageDiv = document.getElementById('message');
+    messageDiv.classList.add('small-message'); // Add the small size
+    messageDiv.innerHTML = `
         <h1>Time's Up!</h1>
-        <p>You didn't escape in time.</p>
-        <p>Try again for a better time!</p>
-        <input id="okBtn" type="button" onclick="toggleVisablity('message-container')" value="Try Again" />
+        <p>You're trapped!</p>
+        <p>Want to test your fate again?</p>
+        <input id="okBtn" class="app-btn" type="button" onclick="toggleVisablity('message-container')" value="Try Again" />
     `;
     document.getElementById('message-container').style.visibility = 'visible';
 }
