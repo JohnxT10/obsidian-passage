@@ -98,7 +98,7 @@ body {
 }
 
 /* 6. Form Elements */
-input, select {
+.app-btn {
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.30);
     height: 45px;
@@ -111,20 +111,22 @@ input, select {
     font-size: 15px;
     text-align: center;
     text-decoration: none;
-    appearance: none;
+    font-family: inherit;
+    font-weight: 600;
+    transition: background 0.2s;
 }
-input:hover, select:hover {
+.app-btn:hover {
     background-color: rgba(0, 0, 0, 0.70);
 }
-input:active, select:active {
-    background-color: black;
-}
-input:focus, select:focus {
+
+.app-btn:focus {
     outline: none;
 }
+
 .custom-select {
     display: inline-block;
 }
+
 select {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -156,6 +158,15 @@ select {
     left: 50%;
     margin-left: -150px;
     margin-top: -150px;
+    background: rgba(24, 24, 24, 0.85); /* dark semi-transparent underlay */
+    border-radius: 16px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.3);
+    padding: 24px;
+}
+
+#message h1 {
+    font-size: 1.5rem;
+    
 }
 
 /* 8. Instructions Bar */

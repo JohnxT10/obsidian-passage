@@ -18,6 +18,46 @@ btn.addEventListener("click", function() {
       }
 });
 
+// Set your desired time limit in seconds
+let timeLimit = 60; // 60 seconds
+let timeRemaining = timeLimit;
+let timerInterval = null;
+let mazeActive = false;
+
+// Call this when the maze starts
+function startTimer() {
+    timeRemaining = timeLimit;
+    document.getElementById('time-remaining').textContent = timeRemaining;
+    mazeActive = true;
+    timerInterval = setInterval(() => {
+        if (!mazeActive) return;
+        timeRemaining--;
+        document.getElementById('time-remaining').textContent = timeRemaining;
+        if (timeRemaining <= 0) {
+            clearInterval(timerInterval);
+            mazeActive = false;
+            showFailureMessage();
+        }
+    }, 1000);
+}
+
+// Call this when the maze is completed
+function stopTimer() {
+    mazeActive = false;
+    clearInterval(timerInterval);
+}
+
+// Show failure message
+function showFailureMessage() {
+    document.getElementById('message').innerHTML = `
+        <h1>Time's Up!</h1>
+        <p>You didn't escape in time.</p>
+        <p>Try again for a better time!</p>
+        <input id="okBtn" type="button" onclick="toggleVisablity('message-container')" value="Try Again" />
+    `;
+    document.getElementById('message-container').style.visibility = 'visible';
+}
+
 
 function rand(max) {
     return Math.floor(Math.random() * max);
@@ -54,6 +94,8 @@ function rand(max) {
   }
   
   function displayVictoryMess(moves) {
+    // <-- Stop the timer when the user wins
+    stopTimer(); 
     document.getElementById("moves").innerHTML = "You Moved " + moves + " Steps.";
     toggleVisablity("message-container");  
   }
@@ -504,4 +546,7 @@ function rand(max) {
     maze = new Maze(difficulty, difficulty);
     draw = new DrawMaze(maze, ctx, cellSize);
     player = new Player(maze, mazeCanvas, cellSize, displayVictoryMess);
+
+    // <-- Start the timer when a new maze is created
+    startTimer(); 
   }

@@ -1,61 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Obsidian Passage</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" 
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-          <link rel="preconnect" href="https://fonts.googleapis.com">
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-          <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
-</head>
-<body class="dark-mode">
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="dark-mode">
+    <div id="page">
+      <h1 class="game-title">Obsidian Passage</h1>
 
-  <div id="page">
-
-    <h1 class="game-title">Obsidian Passage</h1>
-
-    <div id="message-container">
-      <div id="message">
-        <h1>Congratulations!</h1>
-        <p>You escaped.</p>
-        <p id="moves"></p>
-        <input id="okBtn" type="button" onclick="toggleVisablity('Message-Container')" value="Well done!" />
+      <div id="message-container">
+        <div id="message">
+          <h1>Congratulations!</h1>
+          <p>You escaped this time.</p>
+          <p>But you might not be so lucky next time!</p>
+          <p id="moves"></p>
+          <input
+            id="okBtn"
+            type="button"
+            onclick="toggleVisablity('message-container')"
+            value="Well done!"
+          />
+        </div>
       </div>
-    </div>
 
-    <br>
-    <div id="menu">
-      <div class="custom-select">
-        <select id="diffSelect">
-                  <option value="10">Easy</option>
-                  <option value="15">Medium</option>
-                  <option value="25">Hard</option>
-                  <option value="38">Extreme</option>                                      
-        </select>
+      <br />
+      <div id="menu">
+        <div class="custom-select">
+          <select id="diffSelect" class="app-btn">
+            <option value="10">Easy</option>
+            <option value="15">Medium</option>
+            <option value="25">Hard</option>
+            <option value="38">Extreme</option>
+          </select>
+        </div>
+        <input id="startMazeBtn" type="button" class="app-btn" onclick="makeMaze()" value="Start"/>
+                <button id="theme-toggle" class="app-btn">Light Mode</button>
       </div>
-      <input id="startMazeBtn" type="button" onclick="makeMaze()" value="Start" />
-    </div>
 
-    <div>
-        <button id="theme-toggle" class="btn btn-warning">Light Mode</button>
-    </div>
-
-    <div id="view">
-      <div id="mazeContainer">
-        <canvas id="mazeCanvas"  height="600" width="600"></canvas>
+      <div>
+        <span id="timer" style="font-size: 1.2rem; margin-left: 20px"
+        >Time: <span id="time-remaining"></span
+      ></span>
       </div>
+
+      <div id="view">
+        <div id="mazeContainer">
+          <canvas id="mazeCanvas" height="600" width="600"></canvas>
+        </div>
+      </div>
+      <!-- update this text instrictions for laptop and mobile devices -->
+      <div id="instructions">Use arrow keys to move the key to the house!</div>
     </div>
-    <!-- update this text instrictions for laptop and mobile devices -->
-    <div id="instructions">Use arrow keys to move the key to the house!</div>
 
-  </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.19/jquery.touchSwipe.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.19/jquery.touchSwipe.min.js"></script>
-  
-  <script src="assets/js/script.js"></script>
-</body>
+    <script src="assets/js/script.js"></script>
+  </body>
 </html>
