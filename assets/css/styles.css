@@ -198,6 +198,7 @@ select {
         align-items: center;
         justify-content: center;
         gap: 5px;
+        height: auto;
     }
 
     /* Making only the difficulty and start button smaller */

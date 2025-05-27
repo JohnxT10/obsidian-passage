@@ -19,7 +19,7 @@ btn.addEventListener("click", function() {
 });
 
 // Set your desired time limit in seconds
-let timeLimit = 1; // 60 seconds
+let timeLimit = 60; // 60 seconds
 let timeRemaining = timeLimit;
 let timerInterval = null;
 let mazeActive = false;
