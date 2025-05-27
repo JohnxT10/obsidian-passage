@@ -26,6 +26,7 @@ let mazeActive = false;
 
 // Call this when the maze starts
 function startTimer() {
+    clearInterval(timerInterval);
     timeRemaining = timeLimit;
     document.getElementById('time-remaining').textContent = timeRemaining;
     mazeActive = true;
