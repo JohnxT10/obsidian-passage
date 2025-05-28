@@ -138,7 +138,7 @@ select {
 
 #timer {
     background: rgba(128, 0, 128, 0.5); /* dark semi-transparent background */
-    color: red;                       /* white text for contrast */
+    color: white;                       /* white text for contrast */
     padding: 6px 16px;                  /* space around the text */
     border-radius: 8px;                 /* rounded corners */
     font-weight: 600;

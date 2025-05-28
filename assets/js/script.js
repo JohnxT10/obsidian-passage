@@ -38,12 +38,24 @@ function startTimer() {
     not going down faster */
     clearInterval(timerInterval);
     timeRemaining = timeLimit;
-    document.getElementById('time-remaining').textContent = formatTime(timeRemaining);
+    const timeElem = document.getElementById('time-remaining');
+     // <-- Reset color immediately so the first second in the maze isn't red!
+     timeElem.style.color = ''; 
+     timeElem.textContent = formatTime(timeRemaining);
     mazeActive = true;
     timerInterval = setInterval(() => {
         if (!mazeActive) return;
         timeRemaining--;
-        document.getElementById('time-remaining').textContent = formatTime(timeRemaining);
+        timeElem.textContent = formatTime(timeRemaining);
+    
+        // Change color to red when 30 seconds or less remain
+        if (timeRemaining <= 30) {
+            timeElem.style.color = 'red';
+        } else {
+            // Reset to default
+            timeElem.style.color = ''; 
+        }
+    
         if (timeRemaining <= 0) {
             clearInterval(timerInterval);
             mazeActive = false;
