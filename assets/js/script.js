@@ -19,10 +19,17 @@ btn.addEventListener("click", function() {
 });
 
 // Set your desired time limit in seconds
-let timeLimit = 60; // 60 seconds
+let timeLimit = 120;
 let timeRemaining = timeLimit;
 let timerInterval = null;
 let mazeActive = false;
+
+// Helper function to format seconds as mm:ss
+function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+}
 
 // Call this when the maze starts
 function startTimer() {
@@ -30,12 +37,12 @@ function startTimer() {
     not going down faster */
     clearInterval(timerInterval);
     timeRemaining = timeLimit;
-    document.getElementById('time-remaining').textContent = timeRemaining;
+    document.getElementById('time-remaining').textContent = formatTime(timeRemaining);
     mazeActive = true;
     timerInterval = setInterval(() => {
         if (!mazeActive) return;
         timeRemaining--;
-        document.getElementById('time-remaining').textContent = timeRemaining;
+        document.getElementById('time-remaining').textContent = formatTime(timeRemaining);
         if (timeRemaining <= 0) {
             clearInterval(timerInterval);
             mazeActive = false;
@@ -539,6 +546,26 @@ function rand(max) {
   };
   
   window.onresize = resizeCanvasAndMaze;
+
+  function getTimeLimitForDifficulty(difficulty) {
+    switch (parseInt(difficulty)) {
+            // Easy, 2.5 minutes
+        case 10:  
+            return 150; 
+            // Medium, 2 minutes
+        case 15: 
+            return 120; 
+            // Hard, 1.5 minutes
+        case 25:  
+            return 90;  
+            // Extreme, 1 minutes
+        case 38:  
+            return 60;  
+        default:
+            // fallback
+            return 90; 
+    }
+}
   
   function makeMaze() {
     if (player != undefined) {
@@ -551,6 +578,9 @@ function rand(max) {
     maze = new Maze(difficulty, difficulty);
     draw = new DrawMaze(maze, ctx, cellSize);
     player = new Player(maze, mazeCanvas, cellSize, displayVictoryMess);
+
+    // Set timeLimit based on difficulty
+    timeLimit = getTimeLimitForDifficulty(difficulty);
 
     // <-- Start the timer when a new maze is created
     startTimer(); 

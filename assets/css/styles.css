@@ -59,12 +59,13 @@ body {
     box-sizing: border-box;
 }
 
-/* 4. Game Title */
+/* 4. Game Title heading */
 .game-title {
     display: block;
     margin-top: 50px;
     font-size: 2.5rem;
     text-align: center;
+    font-weight: 500;
 }
 
 /* 5. Maze View, Container and Canvas */
@@ -100,13 +101,13 @@ body {
 /* 6. Form Elements */
 .app-btn {
     cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.30);
+    background-color: rgba(128, 0, 128, 0.4);
     height: 45px;
     width: 150px;
     padding: 10px;
     border: none;
     border-radius: 5px;
-    color: white;
+    color: var(--text-color);
     display: inline-block;
     font-size: 15px;
     text-align: center;
@@ -133,6 +134,16 @@ select {
     appearance: none;
     background-repeat: no-repeat;
     background-position: 125px center;
+}
+
+#timer {
+    background: rgba(128, 0, 128, 0.5); /* dark semi-transparent background */
+    color: red;                       /* white text for contrast */
+    padding: 6px 16px;                  /* space around the text */
+    border-radius: 8px;                 /* rounded corners */
+    font-weight: 600;
+    display: inline-block;
+    margin: 8px 0;
 }
 
 /* 7. Message Overlay */
@@ -175,7 +186,6 @@ select {
 
 #message h1 {
     font-size: 1.5rem;
-    
 }
 
 /* 8. Instructions Bar */
