@@ -323,26 +323,81 @@ function rand(max) {
       var y = yCord * cellSize;
     // This adjusts the thickness of the lines.
       ctx.lineWidth = 2;
-  
+
+    //   North wall
       if (cell.n == false) {
+        // Adds shadow to the walls if dark mode is enabled and difficulty is not extreme
+        ctx.save();
+        if (
+            document.body.classList.contains('dark-mode') &&
+            parseInt(difficulty) !== 38
+        ) {
+            ctx.shadowColor = "rgba(0,0,0,0.7)";
+            ctx.shadowBlur = 4;
+        } else {
+            ctx.shadowColor = "rgba(0,0,0,0)";
+            ctx.shadowBlur = 0;
+        }
         ctx.beginPath();
         ctx.moveTo(x, y);
         ctx.lineTo(x + cellSize, y);
         ctx.stroke();
       }
+
+        // South wall
       if (cell.s === false) {
+        // Adds shadow to the walls if dark mode is enabled and difficulty is not extreme
+        ctx.save();
+        if (
+            document.body.classList.contains('dark-mode') &&
+            parseInt(difficulty) !== 38
+        ) {
+            ctx.shadowColor = "rgba(0,0,0,0.7)";
+            ctx.shadowBlur = 4;
+        } else {
+            ctx.shadowColor = "rgba(0,0,0,0)";
+            ctx.shadowBlur = 0;
+        }
         ctx.beginPath();
         ctx.moveTo(x, y + cellSize);
         ctx.lineTo(x + cellSize, y + cellSize);
         ctx.stroke();
       }
+
+        // East wall
       if (cell.e === false) {
+        // Adds shadow to the walls if dark mode is enabled and difficulty is not extreme
+        ctx.save();
+        if (
+            document.body.classList.contains('dark-mode') &&
+            parseInt(difficulty) !== 38
+        ) {
+            ctx.shadowColor = "rgba(0,0,0,0.7)";
+            ctx.shadowBlur = 4;
+        } else {
+            ctx.shadowColor = "rgba(0,0,0,0)";
+            ctx.shadowBlur = 0;
+        }
         ctx.beginPath();
         ctx.moveTo(x + cellSize, y);
         ctx.lineTo(x + cellSize, y + cellSize);
         ctx.stroke();
       }
+
+        // West wall
       if (cell.w === false) {
+        // Adds shadow to the walls if dark mode is enabled and difficulty is not extreme
+        ctx.save();
+        if (
+            document.body.classList.contains('dark-mode') &&
+            parseInt(difficulty) !== 38
+        ) {
+            ctx.shadowColor = "rgba(0,0,0,0.7)";
+            ctx.shadowBlur = 4;
+        } else {
+            ctx.shadowColor = "rgba(0,0,0,0)";
+            ctx.shadowBlur = 0;
+        }
         ctx.beginPath();
         ctx.moveTo(x, y);
         ctx.lineTo(x, y + cellSize);
@@ -362,8 +417,13 @@ function rand(max) {
   
                        function drawEndFlag() {
                 var coord = Maze.endCoord();
-                // Draw the goal image at 80% of the cell size, centered
-                const scale = 0.8;
+                // Draw the goal image at 90% of the cell size, centered
+                // Draw a white shadow/outline
+                ctx.save();
+                ctx.shadowColor = "#fff";
+                // Adjust for stronger/weaker glow
+                ctx.shadowBlur = 8; 
+                const scale = 0.9;
                 const offset = (cellSize * (1 - scale)) / 2;
                 ctx.drawImage(
                     goalImg,
@@ -372,8 +432,9 @@ function rand(max) {
                     cellSize * scale,
                     cellSize * scale
                 );
+                ctx.restore();
             }
-            ctx.restore();
+        
 
             drawEndMethod = drawEndFlag;
             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
@@ -423,6 +484,10 @@ playerImg.onload = goalImg.onload = function() {
     };
   
               function drawSpriteImage(coord) {
+                // Draw a white shadow/outline
+    ctx.save();
+    ctx.shadowColor = "#fff";
+    ctx.shadowBlur = 8; // Adjust for stronger/weaker glow
                 ctx.drawImage(
                     playerImg,
                     coord.x * cellSize,
@@ -430,6 +495,8 @@ playerImg.onload = goalImg.onload = function() {
                     cellSize,
                     cellSize
                 );
+                ctx.restore();
+                // Check if the player has reached the end of the maze
                 if (coord.x === maze.endCoord().x && coord.y === maze.endCoord().y) {
                     onComplete(moves);
                     player.unbindKeyDown();
@@ -554,6 +621,7 @@ playerImg.onload = goalImg.onload = function() {
   
   window.onresize = resizeCanvasAndMaze;
 
+// Get the time limit based on the selected difficulty
   function getTimeLimitForDifficulty(difficulty) {
     switch (parseInt(difficulty)) {
             // Easy, 2.5 minutes
