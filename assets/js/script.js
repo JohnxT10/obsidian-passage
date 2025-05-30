@@ -664,3 +664,24 @@ playerImg.onload = goalImg.onload = function() {
     // <-- Start the timer when a new maze is created
     startTimer(); 
   }
+
+  document.getElementById("arrow-up").addEventListener("click", function() {
+    if (player) player.bindKeyDown();
+    var e = { keyCode: 38 }; // Up arrow
+    player && player["check"] && player["check"](e);
+});
+document.getElementById("arrow-down").addEventListener("click", function() {
+    if (player) player.bindKeyDown();
+    var e = { keyCode: 40 }; // Down arrow
+    player && player["check"] && player["check"](e);
+});
+document.getElementById("arrow-left").addEventListener("click", function() {
+    if (player) player.bindKeyDown();
+    var e = { keyCode: 37 }; // Left arrow
+    player && player["check"] && player["check"](e);
+});
+document.getElementById("arrow-right").addEventListener("click", function() {
+    if (player) player.bindKeyDown();
+    var e = { keyCode: 39 }; // Right arrow
+    player && player["check"] && player["check"](e);
+});

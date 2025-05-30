@@ -26,7 +26,18 @@
         </div>
       </div>
 
-      <br />
+         <!-- How to Play Dropdown -->
+    <details id="how-to-play" style="margin-bottom: 1em;">
+      <summary style="font-size:1.1em; font-weight:bold; cursor:pointer;">How to Play</summary>
+      <ul>
+        <li>Use <b>arrow keys</b> (or on-screen arrows on mobile/tablet) to move the key through the maze.</li>
+        <li>Select your difficulty, then press <b>Start</b> to descend into the darkness.</li>
+        <li>Switch between <b>Light</b> and <b>Dark</b> mode, but beware what lurks in the shadows.</li>
+        <li>Find the hidden door before the passage claims you.</li>
+        <li>Escape before time runs out... or be trapped forever.</li>
+      </ul>
+    </details>
+
       <div id="menu">
         <div class="custom-select">
           <select id="diffSelect" class="app-btn">
@@ -53,6 +64,14 @@
           <canvas id="mazeCanvas" height="600" width="600"></canvas>
         </div>
       </div>
+      <!-- For mobile devices to use the arrows to go up, down, left and right -->
+          <div id="mobile-controls">
+      <button class="arrow-btn" id="arrow-up">▲</button><br>
+      <button class="arrow-btn" id="arrow-left">◀</button>
+      <button class="arrow-btn" id="arrow-down">▼</button>
+      <button class="arrow-btn" id="arrow-right">▶</button>
+    </div>
+
       <!-- update this text instrictions for laptop and mobile devices -->
       <div id="instructions">Use arrow keys to move the key to the house!</div>
     </div>
