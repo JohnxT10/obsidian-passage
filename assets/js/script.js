@@ -15,6 +15,10 @@ btn.addEventListener("click", function() {
        // Redraw the maze with the new color
        if (draw && typeof draw.redrawMaze === "function") {
         draw.redrawMaze(cellSize);
+          // Redraw the player at their current position so that it doesn't get lost
+          if (player && typeof player.redrawPlayer === "function") {
+            player.redrawPlayer(cellSize);
+          }
       }
 });
 
