@@ -541,7 +541,9 @@ playerImg.onload = goalImg.onload = function() {
         draw.redrawMaze(cellSize);
         drawSprite(cellCoords);
     }
-  
+
+   this.check = check;
+   
     this.bindKeyDown = function() {
       window.addEventListener("keydown", check, false);
   
