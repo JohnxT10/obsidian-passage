@@ -91,7 +91,8 @@ function showFailureMessage() {
     messageDiv.classList.add('small-message'); // Add the small size
     messageDiv.innerHTML = `
         <h1>Time Slips Away...</h1>
-        <p>The shadows close in. You are lost to the passage.</p>
+        <p>The shadows close in.</p>
+        <p>You are lost to the passage.</p>
         <p>Dare to tempt fate once more?</p>
         <input id="okBtn" class="app-btn" type="button" onclick="toggleVisablity('message-container')" value="Try Again" />
     `;
