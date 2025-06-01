@@ -22,6 +22,17 @@ btn.addEventListener("click", function() {
       }
 });
 
+const mazeStats = {
+    // Easy
+  10: { attempts: 0, completed: 0 }, 
+    // Medium
+  15: { attempts: 0, completed: 0 }, 
+    // Hard
+  25: { attempts: 0, completed: 0 }, 
+    // Extreme
+  38: { attempts: 0, completed: 0 }  
+};
+
 // Set your desired time limit in seconds
 // At the top of your script:
 let timeLimit;
@@ -79,9 +90,9 @@ function showFailureMessage() {
     const messageDiv = document.getElementById('message');
     messageDiv.classList.add('small-message'); // Add the small size
     messageDiv.innerHTML = `
-        <h1>Time's Up!</h1>
-        <p>You're trapped!</p>
-        <p>Want to test your fate again?</p>
+        <h1>Time Slips Away...</h1>
+        <p>The shadows close in. You are lost to the passage.</p>
+        <p>Dare to tempt fate once more?</p>
         <input id="okBtn" class="app-btn" type="button" onclick="toggleVisablity('message-container')" value="Try Again" />
     `;
     document.getElementById('message-container').style.visibility = 'visible';
@@ -121,11 +132,28 @@ function rand(max) {
     virtCanvas.remove();
     return spriteOutput;
   }
+
+//   Update the scoreboard with the current maze stats
+  function updateScoreboard() {
+    const names = {10: "Easy", 15: "Medium", 25: "Hard", 38: "Extreme"};
+    let html = "";
+    for (const diff in mazeStats) {
+        const stat = mazeStats[diff];
+        if (stat.attempts > 0) {
+            // Only display difficulties that have attempts
+            html += `<div><b>${names[diff]}</b>: <span class="score-completed">${stat.completed}</span> out of <span class="score-attempts">${stat.attempts}</span> attempt${stat.attempts > 1 ? "s" : ""}</div>`;
+        }
+    }
+    document.getElementById("scoreboard").innerHTML = html;
+}
   
   function displayVictoryMess(moves) {
-    // <-- Stop the timer when the user wins
+    // Stop the timer when the user wins
     stopTimer(); 
     document.getElementById("moves").innerHTML = "You Moved " + moves + " Steps.";
+    // Track completion
+    if (mazeStats[difficulty]) mazeStats[difficulty].completed++;
+    updateScoreboard();
     toggleVisablity("message-container");  
   }
   
@@ -330,82 +358,100 @@ function rand(max) {
 
     //   North wall
       if (cell.n == false) {
-        // Adds shadow to the walls if dark mode is enabled and difficulty is not extreme
+        
         ctx.save();
-        if (
-            document.body.classList.contains('dark-mode') &&
-            parseInt(difficulty) !== 38
-        ) {
-            ctx.shadowColor = "rgba(0,0,0,0.7)";
-            ctx.shadowBlur = 4;
-        } else {
-            ctx.shadowColor = "rgba(0,0,0,0)";
-            ctx.shadowBlur = 0;
-        }
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.lineTo(x + cellSize, y);
-        ctx.stroke();
+        // Only add shadow for easy and medium difficulties
+                if (parseInt(difficulty) === 10 || parseInt(difficulty) === 15) {
+                    // dark shadow for dark mode
+                    if (document.body.classList.contains('dark-mode')) {
+                        ctx.shadowColor = "rgba(0,0,0,0.7)"; 
+                    } else {
+                        // light shadow for light mode
+                        ctx.shadowColor = "rgba(0,0,0,0.5)"; 
+                    }
+                    ctx.shadowBlur = 4;
+                } else {
+                    // No shadow for other difficulties
+                    ctx.shadowColor = "rgba(0,0,0,0)";
+                    ctx.shadowBlur = 0;
+                }
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                ctx.lineTo(x + cellSize, y);
+                ctx.stroke();
+                ctx.restore();
       }
 
         // South wall
       if (cell.s === false) {
-        // Adds shadow to the walls if dark mode is enabled and difficulty is not extreme
-        ctx.save();
-        if (
-            document.body.classList.contains('dark-mode') &&
-            parseInt(difficulty) !== 38
-        ) {
-            ctx.shadowColor = "rgba(0,0,0,0.7)";
-            ctx.shadowBlur = 4;
+      // Only add shadow for easy and medium difficulties
+      if (parseInt(difficulty) === 10 || parseInt(difficulty) === 15) {
+        // dark shadow for dark mode
+        if (document.body.classList.contains('dark-mode')) {
+            ctx.shadowColor = "rgba(0,0,0,0.7)"; 
         } else {
-            ctx.shadowColor = "rgba(0,0,0,0)";
-            ctx.shadowBlur = 0;
+            // light shadow for light mode
+            ctx.shadowColor = "rgba(0,0,0,0.5)"; 
         }
-        ctx.beginPath();
-        ctx.moveTo(x, y + cellSize);
-        ctx.lineTo(x + cellSize, y + cellSize);
-        ctx.stroke();
+        ctx.shadowBlur = 4;
+    } else {
+        // No shadow for hard and extreme difficulties
+        ctx.shadowColor = "rgba(0,0,0,0)";
+        ctx.shadowBlur = 0;
+    }
+    ctx.beginPath();
+    ctx.moveTo(x, y + cellSize);
+    ctx.lineTo(x + cellSize, y + cellSize);
+    ctx.stroke();
+    ctx.restore();
       }
 
         // East wall
       if (cell.e === false) {
-        // Adds shadow to the walls if dark mode is enabled and difficulty is not extreme
-        ctx.save();
-        if (
-            document.body.classList.contains('dark-mode') &&
-            parseInt(difficulty) !== 38
-        ) {
-            ctx.shadowColor = "rgba(0,0,0,0.7)";
-            ctx.shadowBlur = 4;
+       // Only add shadow for easy and medium difficulties
+      if (parseInt(difficulty) === 10 || parseInt(difficulty) === 15) {
+        // dark shadow for dark mode
+        if (document.body.classList.contains('dark-mode')) {
+            ctx.shadowColor = "rgba(0,0,0,0.7)"; 
         } else {
-            ctx.shadowColor = "rgba(0,0,0,0)";
-            ctx.shadowBlur = 0;
+            // light shadow for light mode
+            ctx.shadowColor = "rgba(0,0,0,0.5)"; 
         }
-        ctx.beginPath();
-        ctx.moveTo(x + cellSize, y);
-        ctx.lineTo(x + cellSize, y + cellSize);
-        ctx.stroke();
+        ctx.shadowBlur = 4;
+    } else {
+        // No shadow for hard and extreme difficulties
+        ctx.shadowColor = "rgba(0,0,0,0)";
+        ctx.shadowBlur = 0;
+    }
+    ctx.beginPath();
+    ctx.moveTo(x + cellSize, y);
+    ctx.lineTo(x + cellSize, y + cellSize);
+    ctx.stroke();
+    ctx.restore();
       }
 
         // West wall
       if (cell.w === false) {
-        // Adds shadow to the walls if dark mode is enabled and difficulty is not extreme
-        ctx.save();
-        if (
-            document.body.classList.contains('dark-mode') &&
-            parseInt(difficulty) !== 38
-        ) {
-            ctx.shadowColor = "rgba(0,0,0,0.7)";
-            ctx.shadowBlur = 4;
+     // Only add shadow for easy and medium difficulties
+     if (parseInt(difficulty) === 10 || parseInt(difficulty) === 15) {
+        // dark shadow for dark mode
+        if (document.body.classList.contains('dark-mode')) {
+            ctx.shadowColor = "rgba(0,0,0,0.7)"; 
         } else {
-            ctx.shadowColor = "rgba(0,0,0,0)";
-            ctx.shadowBlur = 0;
+            // light shadow for light mode
+            ctx.shadowColor = "rgba(0,0,0,0.5)"; 
         }
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.lineTo(x, y + cellSize);
-        ctx.stroke();
+        ctx.shadowBlur = 4;
+    } else {
+        // No shadow for hard and extreme difficulties
+        ctx.shadowColor = "rgba(0,0,0,0)";
+        ctx.shadowBlur = 0;
+    }
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x, y + cellSize);
+    ctx.stroke();
+    ctx.restore();
       }
     }
   
@@ -510,6 +556,10 @@ playerImg.onload = goalImg.onload = function() {
     
   
        function check(e) {
+        // Prevent arrow keys from scrolling the page
+    if ([37, 38, 39, 40].includes(e.keyCode)) {
+        if (e.preventDefault) e.preventDefault();
+    }
         var cell = map[cellCoords.x][cellCoords.y];
         moves++;
         switch (e.keyCode) {
@@ -543,7 +593,7 @@ playerImg.onload = goalImg.onload = function() {
     }
 
    this.check = check;
-   
+
     this.bindKeyDown = function() {
       window.addEventListener("keydown", check, false);
   
@@ -655,6 +705,11 @@ playerImg.onload = goalImg.onload = function() {
     }
     var e = document.getElementById("diffSelect");
     difficulty = e.options[e.selectedIndex].value;
+
+    // Shows the attempts for the selected difficulty
+    if (mazeStats[difficulty]) mazeStats[difficulty].attempts++;
+
+
     cellSize = mazeCanvas.width / difficulty;
     maze = new Maze(difficulty, difficulty);
     draw = new DrawMaze(maze, ctx, cellSize);
@@ -663,8 +718,11 @@ playerImg.onload = goalImg.onload = function() {
     // Set timeLimit based on difficulty
     timeLimit = getTimeLimitForDifficulty(difficulty);
 
-    // <-- Start the timer when a new maze is created
+    // Start the timer when a new maze is created
     startTimer(); 
+
+    // Update scoreboard
+    updateScoreboard();
   }
 
   document.getElementById("arrow-up").addEventListener("click", function() {

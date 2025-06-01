@@ -198,7 +198,13 @@ select {
     font-size: 1.5rem;
 }
 
-/* 8. Arrow Controls */
+/* 8. Attempted scoreboard */
+
+.score-completed { color: green; }
+.score-attempts { color: red; }
+
+
+/* 9. Arrow Controls */
 #mobile-controls {
     display: none;
     margin-top: 10px;
@@ -244,7 +250,7 @@ select {
       }
   }
 
-/* 9. Responsive: small/medium devices */
+/* 10. Responsive: small/medium devices */
 @media only screen and (max-width: 500px) {
       /* For light mode to sit underneath difficulty and start button */
       #menu {
