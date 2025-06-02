@@ -95,7 +95,7 @@ function showFailureMessage() {
         <p>The shadows close in.</p>
         <p>You are lost to the passage.</p>
         <p>Dare to tempt fate once more?</p>
-        <input id="okBtn" class="app-btn" type="button" value="Try Again" />
+        <input id="okBtn" class="app-btn" type="button" value="Try Again">
     `;
     document.getElementById('message-container').style.visibility = 'visible';
 
@@ -189,7 +189,7 @@ let prevStats = {};
   function displayVictoryMess(moves) {
     // Stop the timer when the user wins
     stopTimer(); 
-    document.getElementById("moves").innerHTML = "You Moved " + moves + " Steps.";
+    document.getElementById("moves").innerHTML = "You Moved " + moves + " Steps To Escape.";
     // Track completion
     if (mazeStats[difficulty]) mazeStats[difficulty].completed++;
     updateScoreboard();
@@ -635,47 +635,10 @@ playerImg.onload = goalImg.onload = function() {
 
     this.bindKeyDown = function() {
       window.addEventListener("keydown", check, false);
-  
-      $("#view").swipe({
-        swipe: function(
-          event,
-          direction,
-          distance,
-          duration,
-          fingerCount,
-          fingerData
-        ) {
-          console.log(direction);
-          switch (direction) {
-            case "up":
-              check({
-                keyCode: 38
-              });
-              break;
-            case "down":
-              check({
-                keyCode: 40
-              });
-              break;
-            case "left":
-              check({
-                keyCode: 37
-              });
-              break;
-            case "right":
-              check({
-                keyCode: 39
-              });
-              break;
-          }
-        },
-        threshold: 0
-      });
     };
   
     this.unbindKeyDown = function() {
       window.removeEventListener("keydown", check, false);
-      $("#view").swipe("destroy");
     };
   
     drawSprite(maze.startCoord());
@@ -692,29 +655,42 @@ playerImg.onload = goalImg.onload = function() {
   // sprite.src = 'media/sprite.png';
 
 
- function resizeCanvasAndMaze() {
-    let viewWidth = $("#view").width();
-    let viewHeight = $("#view").height();
-    // Set a maximum size in pixels (e.g., 600)
-    let maxSize = 600;
-    let size = Math.min(viewWidth, viewHeight * 0.95, maxSize);
-    ctx.canvas.width = size;
-    ctx.canvas.height = size;
-    if (typeof difficulty !== "undefined") {
-        cellSize = mazeCanvas.width / difficulty;
-        if (player != null && draw != null) {
-            draw.redrawMaze(cellSize);
-            player.redrawPlayer(cellSize);
-        }
+function resizeMazeCanvas() {
+    const canvas = document.getElementById('mazeCanvas');
+    const container = canvas.parentElement;
+    const dpr = window.devicePixelRatio || 1;
+
+    // Use the smaller of the container's width or the window's height for a square
+    const maxSize = 500; // Match your CSS max-width
+    const displaySize = Math.min(container.clientWidth, window.innerHeight * 0.6, maxSize);
+
+    // Set the canvas pixel size for sharpness
+    canvas.width = displaySize * dpr;
+    canvas.height = displaySize * dpr;
+
+    // Set the CSS size for layout
+    canvas.style.width = displaySize + "px";
+    canvas.style.height = displaySize + "px";
+
+    // Scale the context for high-DPI screens
+    const ctx = canvas.getContext('2d');
+    ctx.setTransform(1, 0, 0, 1, 0, 0); // reset
+    ctx.scale(dpr, dpr);
+
+    // Only redraw if draw and player exist
+    if (typeof draw !== "undefined" && draw && typeof draw.redrawMaze === "function") {
+        draw.redrawMaze(cellSize);
+    }
+    if (typeof player !== "undefined" && player && typeof player.redrawPlayer === "function") {
+        player.redrawPlayer(cellSize);
     }
 }
 
   
-  window.onload = function() {
-    resizeCanvasAndMaze();
-  };
-  
-  window.onresize = resizeCanvasAndMaze;
+window.onload = function() {
+  resizeMazeCanvas();
+};
+window.onresize = resizeMazeCanvas;
 
 // Get the time limit based on the selected difficulty
   function getTimeLimitForDifficulty(difficulty) {
@@ -742,6 +718,10 @@ playerImg.onload = goalImg.onload = function() {
       player.unbindKeyDown();
       player = null;
     }
+    // Ensure canvas is sharp and sized correctly
+    resizeMazeCanvas();
+
+    // Get the selected difficulty from the dropdown
     var e = document.getElementById("diffSelect");
     difficulty = e.options[e.selectedIndex].value;
 
@@ -749,7 +729,7 @@ playerImg.onload = goalImg.onload = function() {
     if (mazeStats[difficulty]) mazeStats[difficulty].attempts++;
 
 
-    cellSize = mazeCanvas.width / difficulty;
+    cellSize = mazeCanvas.clientWidth / difficulty;
     maze = new Maze(difficulty, difficulty);
     draw = new DrawMaze(maze, ctx, cellSize);
     player = new Player(maze, mazeCanvas, cellSize, displayVictoryMess);

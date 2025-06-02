@@ -16,13 +16,15 @@
     <div id="page">
       <h1 class="game-title">Obsidian Passage</h1>
 
+      <!-- When user completes or fails the maze a message will appear -->
       <div id="message-container">
         <div id="message">
-          <h1>Congratulations!</h1>
-          <p>You escaped this time.</p>
-          <p>But you might not be so lucky next time!</p>
-          <p id="moves"></p>
-          <input id="okBtn" class="app-btn" type="button" value="Well done!">
+        <h1>Congratulations!</h1>
+        <p id="moves"></p>
+        <p>You found the exit, but the darkness lingers behind your eyes.</p>
+        <p>Will you tempt fate again, or has the passage marked you?</p>
+          
+          <input id="okBtn" class="app-btn" type="button" value="Tempt Fate">
         </div>
       </div>
 
@@ -38,6 +40,7 @@
       </ul>
     </details>
 
+    <!-- Difficulty -->
       <div id="menu">
         <div class="custom-select">
           <select id="diffSelect" class="app-btn">
@@ -47,7 +50,7 @@
             <option value="38">Extreme</option>
           </select>
         </div>
-        <!-- the disabled is there to wait for the images to load before the 
+        <!-- Disabled is there to wait for the images to load before the 
          maze can start -->
         <input id="startMazeBtn" type="button" class="app-btn" value="Start" disabled>
     <input id="theme-toggle" class="app-btn" type="button" value="Light Mode" >
@@ -56,9 +59,11 @@
       <div>
         <span id="timer">Time: <span id="time-remaining"></span></span>
       </div>
-
+      <!-- Maze contents -->
       <div id="view">
+        <!-- The structural container for the canvas used for styling -->
         <div id="mazeContainer">
+            <!-- The maze is drawn -->
           <canvas id="mazeCanvas"></canvas>
         </div> 
         <div id="scoreboard"></div>
