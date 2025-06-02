@@ -153,7 +153,16 @@ ul {
     background 0.2s;
 }
 .app-btn:hover {
-    background: rgba(0, 0, 0, 0.70);
+    background:
+    /* Top layer */
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.25),
+      rgba(0,0,0,0.35)
+    ),
+    /* Bottom layer */
+    var(--bg-color);
+  transition: background 0.2s;
 }
 
 .app-btn:active {
@@ -241,6 +250,7 @@ select {
 #scoreboard {
     text-align:center; 
     margin-top: 1em;
+    color: var(--primary-text-color);
 }
 
 .score-completed { color: green; }

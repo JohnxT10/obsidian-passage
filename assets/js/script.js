@@ -95,13 +95,13 @@ function showFailureMessage() {
         <p>The shadows close in.</p>
         <p>You are lost to the passage.</p>
         <p>Dare to tempt fate once more?</p>
-        <input id="okBtn" class="app-btn" type="button" onclick="toggleVisablity('message-container')" value="Try Again" />
+        <input id="okBtn" class="app-btn" type="button" value="Try Again" />
     `;
     document.getElementById('message-container').style.visibility = 'visible';
 
     // Attach the event listener after the button is added to the DOM
     document.getElementById("okBtn").addEventListener("click", function() {
-        toggleVisablity('message-container');
+        toggleVisiblity('message-container');
     });
 }
 
@@ -161,10 +161,10 @@ function rand(max) {
     // Track completion
     if (mazeStats[difficulty]) mazeStats[difficulty].completed++;
     updateScoreboard();
-    toggleVisablity("message-container");  
+    toggleVisiblity("message-container");  
   }
   
-  function toggleVisablity(id) {
+  function toggleVisiblity(id) {
     if (document.getElementById(id).style.visibility == "visible") {
       document.getElementById(id).style.visibility = "hidden";
     } else {
@@ -762,7 +762,7 @@ document.addEventListener("DOMContentLoaded", function() {
   var okBtn = document.getElementById("okBtn");
   if (okBtn) {
     okBtn.addEventListener("click", function() {
-      toggleVisablity('message-container');
+      toggleVisiblity('message-container');
     });
   }
 });
