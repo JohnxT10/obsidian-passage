@@ -406,7 +406,8 @@ let prevStats = {};
                         ctx.shadowColor = "rgba(0,0,0,0.7)"; 
                     } else {
                         // light shadow for light mode
-                        ctx.shadowColor = "rgba(0,0,0,0.5)"; 
+                        ctx.shadowColor = "rgba(255, 255, 255, 0.3)"; 
+                        ctx.shadowBlur = 10;
                     }
                     ctx.shadowBlur = 4;
                 } else {
@@ -430,7 +431,8 @@ let prevStats = {};
             ctx.shadowColor = "rgba(0,0,0,0.7)"; 
         } else {
             // light shadow for light mode
-            ctx.shadowColor = "rgba(0,0,0,0.5)"; 
+            ctx.shadowColor = "rgba(255, 255, 255, 0.3)"; 
+            ctx.shadowBlur = 10;
         }
         ctx.shadowBlur = 4;
     } else {
@@ -454,7 +456,8 @@ let prevStats = {};
             ctx.shadowColor = "rgba(0,0,0,0.7)"; 
         } else {
             // light shadow for light mode
-            ctx.shadowColor = "rgba(0,0,0,0.5)"; 
+            ctx.shadowColor = "rgba(255, 255, 255, 0.3)"; 
+            ctx.shadowBlur = 10;
         }
         ctx.shadowBlur = 4;
     } else {
@@ -478,7 +481,8 @@ let prevStats = {};
             ctx.shadowColor = "rgba(0,0,0,0.7)"; 
         } else {
             // light shadow for light mode
-            ctx.shadowColor = "rgba(0,0,0,0.5)"; 
+            ctx.shadowColor = "rgba(255, 255, 255, 0.3)"; 
+            ctx.shadowBlur = 10;
         }
         ctx.shadowBlur = 4;
     } else {
