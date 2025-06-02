@@ -88,7 +88,8 @@ function stopTimer() {
 // Show failure message
 function showFailureMessage() {
     const messageDiv = document.getElementById('message');
-    messageDiv.classList.add('small-message'); // Add the small size
+    // Add the small size
+    messageDiv.classList.add('small-message'); 
     messageDiv.innerHTML = `
         <h1>Time Slips Away...</h1>
         <p>The shadows close in.</p>
@@ -97,6 +98,11 @@ function showFailureMessage() {
         <input id="okBtn" class="app-btn" type="button" onclick="toggleVisablity('message-container')" value="Try Again" />
     `;
     document.getElementById('message-container').style.visibility = 'visible';
+
+    // Attach the event listener after the button is added to the DOM
+    document.getElementById("okBtn").addEventListener("click", function() {
+        toggleVisablity('message-container');
+    });
 }
 
 
@@ -745,4 +751,18 @@ document.getElementById("arrow-right").addEventListener("click", function() {
     if (player) player.bindKeyDown();
     var e = { keyCode: 39 }; // Right arrow
     player && player["check"] && player["check"](e);
+});
+
+// Start the maze when the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById("startMazeBtn").addEventListener("click", makeMaze);
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  var okBtn = document.getElementById("okBtn");
+  if (okBtn) {
+    okBtn.addEventListener("click", function() {
+      toggleVisablity('message-container');
+    });
+  }
 });

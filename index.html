@@ -22,13 +22,13 @@
           <p>You escaped this time.</p>
           <p>But you might not be so lucky next time!</p>
           <p id="moves"></p>
-          <input id="okBtn" class="app-btn" type="button" onclick="toggleVisablity('message-container')" value="Well done!">
+          <input id="okBtn" class="app-btn" type="button" value="Well done!">
         </div>
       </div>
 
          <!-- How to Play Dropdown -->
-    <details id="how-to-play" style="margin-bottom: 1em;">
-      <summary style="font-size:1.1em; font-weight:bold; cursor:pointer;">How to Play</summary>
+    <details id="how-to-play">
+      <summary class="how-to-summary">How to Play</summary>
       <ul>
         <li>Use <b>arrow keys</b> (or on-screen arrows on mobile/tablet) to move the key through the maze.</li>
         <li>Select your difficulty, then press <b>Start</b> to descend into the darkness.</li>
@@ -49,21 +49,19 @@
         </div>
         <!-- the disabled is there to wait for the images to load before the 
          maze can start -->
-        <input id="startMazeBtn" type="button" class="app-btn" onclick="makeMaze()" value="Start" disabled>
+        <input id="startMazeBtn" type="button" class="app-btn" value="Start" disabled>
     <input id="theme-toggle" class="app-btn" type="button" value="Light Mode" >
   </div>
 
       <div>
-        <span id="timer" style="font-size: 1.2rem; margin-left: 20px"
-        >Time: <span id="time-remaining"></span
-      ></span>
+        <span id="timer">Time: <span id="time-remaining"></span></span>
       </div>
 
       <div id="view">
         <div id="mazeContainer">
-          <canvas id="mazeCanvas" height="600" width="600"></canvas>
+          <canvas id="mazeCanvas"></canvas>
         </div> 
-        <div id="scoreboard" style="text-align:center; margin-top: 1em;"></div>
+        <div id="scoreboard"></div>
       </div>
       <!-- For mobile devices to use the arrows to go up, down, left and right -->
           <div id="mobile-controls">

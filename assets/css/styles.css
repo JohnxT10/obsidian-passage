@@ -2,6 +2,8 @@
 body.dark-mode {
     /* Dark Olive */
     --bg-color:  linear-gradient(145deg, #6b6b3b 0%, #3a3a1a 100%);
+    /* Opposite of the bg color */
+    --opposite-bg-color: linear-gradient(145deg, #3a3a1a 0%, #6b6b3b 100%);
     /* Brighter grey at the top */
     --bg-gradient-top: #232323;   
     /* Darker grey at the bottom */
@@ -18,8 +20,10 @@ body.dark-mode {
 
 /* Light mode theme variables and background */
 body.light-mode {
-    /*  */
+    /* Deep dark purple */
     --bg-color: linear-gradient(145deg, #3a1c4a 0%, #1a0823 100%);
+       /* Opposite of the bg color */
+    --opposite-bg-color: linear-gradient(145deg, #1a0823 0%, #3a1c4a 100%);
     /* Light grey at the top */
     --bg-gradient-top: #bdbdbd;   
     /* Slightly darker grey at the bottom */
@@ -47,12 +51,14 @@ body {
 
 /* 3. Layout Containers */
 #page {
-    text-align: center;
-    /* Ensure the page fills the viewport */
-    min-height: 100vh;    
     /* Enable flexbox */  
     display: flex;          
     flex-direction: column;
+    align-items: center;    
+    justify-content: center;
+    /* Ensure the page fills the viewport */
+    min-height: 100vh;   
+    text-align: center; 
 }
 #menu {
     margin: auto;
@@ -74,6 +80,13 @@ body {
 /* 5. How to play instructions */
 #how-to-play {
     color: var(--primary-text-color);
+    margin-bottom: 1em;
+}
+
+.how-to-summary {
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 ul {
@@ -83,7 +96,7 @@ ul {
     text-align: left;
 }
 
-/* 5. Maze View, Container and Canvas */
+/* 6. Maze View, Container and Canvas */
 
 /* Maze View */
 #view {
@@ -94,9 +107,9 @@ ul {
 
 /* Maze Container */
 #mazeContainer {
+    display: block; 
     top: 15px;
     opacity: 1;
-    display: inline-block;
     margin: 0 auto;
     border-radius: 10px;
     width: 90%;
@@ -107,13 +120,13 @@ ul {
 #mazeCanvas {
     margin: 0;
     display: block;
-    width: 100%;
-    height: auto;
+    width: 600px;
+    height: 600px;
     max-width: 500px;
     max-height: 60vh;
 }
 
-/* 6. Form Elements */
+/* 7. Form Elements */
 .app-btn {
     cursor: pointer;
     height: 45px;
@@ -140,7 +153,7 @@ ul {
     background 0.2s;
 }
 .app-btn:hover {
-    background-color: rgba(0, 0, 0, 0.70);
+    background: rgba(0, 0, 0, 0.70);
 }
 
 .app-btn:active {
@@ -149,7 +162,7 @@ ul {
       0 1.5px 0 #222 inset;
     transform: translateY(2px) scale(0.97);
     /* Opposite linear gradient to give a 3D look when pressed */
-    background: linear-gradient(145deg, #3a3a1a 0%, #6b6b3b 100%);
+    background: var(--opposite-bg-color)
   }
 
 .app-btn:focus {
@@ -177,10 +190,11 @@ select {
     border-radius: 8px;                 
     font-weight: 600;
     display: inline-block;
-    margin: 8px 0;
+    margin: 8px 0 8px 20px;
+    font-size: 1.2rem; 
 }
 
-/* 7. Message Overlay */
+/* 8. Message Overlay */
 #message-container {
     visibility: hidden;
     color: white;
@@ -223,13 +237,17 @@ select {
     font-size: 1.5rem;
 }
 
-/* 8. Attempted scoreboard */
+/* 9. Attempted scoreboard */
+#scoreboard {
+    text-align:center; 
+    margin-top: 1em;
+}
 
 .score-completed { color: green; }
 .score-attempts { color: red; }
 
 
-/* 9. Arrow Controls */
+/* 10. Arrow Controls */
 #mobile-controls {
     display: none;
     margin-top: 10px;
@@ -271,7 +289,7 @@ select {
           0 1.5px 0 #222 inset;
         transform: translateY(2px) scale(0.97);
          /* Opposite linear gradient to give a 3D look when pressed */
-        background: linear-gradient(145deg, #3a3a1a 0%, #6b6b3b 100%);
+        background: var(--opposite-bg-color);
       }
       
       .arrow-btn:focus {
@@ -279,7 +297,7 @@ select {
       }
   }
 
-/* 10. Responsive: small/medium devices */
+/* 11. Responsive: small/medium devices */
 @media only screen and (max-width: 500px) {
       /* For light mode to sit underneath difficulty and start button */
       #menu {
