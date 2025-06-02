@@ -257,6 +257,18 @@ select {
 .score-attempts { color: red; }
 
 
+/* When the scoreboard numbers increase */
+.score-flash {
+  animation: flash-highlight 1.5s;
+}
+
+@keyframes flash-highlight {
+  0%   { background: #ffe066; color: #181818; }
+  70%  { background: #ffe066; color: #181818; }
+  100% { background: none; color: inherit; }
+}
+
+
 /* 10. Arrow Controls */
 #mobile-controls {
     display: none;

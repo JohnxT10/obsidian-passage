@@ -141,6 +141,8 @@ function rand(max) {
   }
 
 //   Update the scoreboard with the current maze stats
+let prevStats = {};
+
   function updateScoreboard() {
     const names = {10: "Easy", 15: "Medium", 25: "Hard", 38: "Extreme"};
     let html = "";
@@ -148,10 +150,40 @@ function rand(max) {
         const stat = mazeStats[diff];
         if (stat.attempts > 0) {
             // Only display difficulties that have attempts
-            html += `<div><b>${names[diff]}</b>: <span class="score-completed">${stat.completed}</span> out of <span class="score-attempts">${stat.attempts}</span> attempt${stat.attempts > 1 ? "s" : ""}</div>`;
+        html += `<div><b>${names[diff]}</b>: <span class="score-completed" id="score-completed-${diff}">${stat.completed}</span>
+        completed out of <span class="score-attempts" id="score-attempts-${diff}">${stat.attempts}</span> 
+        attempt${stat.attempts > 1 ? "s" : ""}</div>`;
         }
     }
-    document.getElementById("scoreboard").innerHTML = html;
+    const scoreboard = document.getElementById("scoreboard");
+    scoreboard.innerHTML = html;
+
+        // Highlight if numbers increased
+        for (const diff in mazeStats) {
+            const stat = mazeStats[diff];
+            if (prevStats[diff]) {
+                if (stat.completed > prevStats[diff].completed) {
+                    const el = document.getElementById(`score-completed-${diff}`);
+                    if (el) {
+                        el.classList.add("score-flash");
+                        setTimeout(() => el.classList.remove("score-flash"), 700);
+                    }
+                }
+                if (stat.attempts > prevStats[diff].attempts) {
+                    const el = document.getElementById(`score-attempts-${diff}`);
+                    if (el) {
+                        el.classList.add("score-flash");
+                        setTimeout(() => el.classList.remove("score-flash"), 700);
+                    }
+                }
+            }
+        }
+        prevStats = JSON.parse(JSON.stringify(mazeStats));
+
+    // Scroll to scoreboard if it has content
+    if (html.trim() !== "") {
+        scoreboard.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
 }
   
   function displayVictoryMess(moves) {
