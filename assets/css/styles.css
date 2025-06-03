@@ -96,38 +96,32 @@ ul {
     text-align: left;
 }
 
-/* 6. Maze View, Container and Canvas */
+/* 6. Username section styling */
+#username-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
-/* Maze View */
-#view {
-    width: 100%;
-    max-width: 600px;
-    flex: 1 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+label {
+    letter-spacing: 1px;
+    color: var(--primary-text-color);
+    text-shadow: 0 0 8px rgba(0,0,0,0.7);
+}
+
+#username-input {
+  width: 220px;
+  margin: 25px;
+}
+
+#username-input::placeholder {
+    color: #aaaaaa;
   }
-
-/* Maze Container */
-#mazeContainer {
-    display: block; 
-    top: 15px;
-    opacity: 1;
-    margin: 0 auto;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 500px;
-}
-
-/* Maze Canvas */
-#mazeCanvas {
-    margin: 0;
-    display: block;
-    width: 100%;
-    height: auto;
-    max-width: 500px;
-    max-height: 60vh;
-}
+  
+  #username-input.error::placeholder {
+    color: #dc143c;
+  }
 
 /* 7. Form Elements */
 .app-btn {
@@ -206,11 +200,43 @@ select {
     font-size: 1.2rem; 
 }
 
-/* 8. Message Overlay */
-#message-container {
-    visibility: hidden;
-    color: white;
+/* 8. Maze View, Container and Canvas */
+
+/* Maze View */
+#view {
+    width: 100%;
+    max-width: 600px;
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+/* Maze Container */
+#mazeContainer {
+    display: block; 
+    top: 15px;
+    opacity: 1;
+    margin: 0 auto;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+}
+
+/* Maze Canvas */
+#mazeCanvas {
+    margin: 0;
     display: block;
+    width: 100%;
+    height: auto;
+    max-width: 500px;
+    max-height: 60vh;
+}
+
+/* 9. Message Overlay */
+#message-container {
+    display: none;
+    color: white;
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -249,7 +275,7 @@ select {
     font-size: 1.5rem;
 }
 
-/* 9. Attempted scoreboard */
+/* 10. Attempted scoreboard */
 #scoreboard {
     text-align:center; 
     margin-top: 1em;
@@ -272,7 +298,7 @@ select {
 }
 
 
-/* 10. Arrow Controls */
+/* 11. Arrow Controls */
 #mobile-controls {
     display: none;
     margin-top: 10px;
@@ -322,7 +348,7 @@ select {
       }
   }
 
-/* 11. Responsive: small/medium devices */
+/* 12. Responsive: small/medium devices */
 @media only screen and (max-width: 500px) {
       /* For light mode to sit underneath difficulty and start button */
       #menu {

@@ -18,14 +18,7 @@
 
       <!-- When user completes or fails the maze a message will appear -->
       <div id="message-container">
-        <div id="message">
-        <h1>Congratulations!</h1>
-        <p id="moves"></p>
-        <p>You found the exit, but the darkness lingers behind your eyes.</p>
-        <p>Will you tempt fate again, or has the passage marked you?</p>
-          
-          <input id="okBtn" class="app-btn" type="button" value="Tempt Fate">
-        </div>
+        <div id="message"></div>
       </div>
 
          <!-- How to Play Dropdown -->
@@ -39,6 +32,13 @@
         <li>Escape before time runs out... or be trapped forever.</li>
       </ul>
     </details>
+
+        <!-- Username Prompt and Input -->
+    <div id="username-section">
+      <label for="username-input">Before you enter, the void demands your name...</label>
+      <input id="username-input" class="app-btn" type="text" maxlength="20" placeholder="Your username">
+      <input id="username-submit" class="app-btn" type="button" value="Continue">
+    </div>
 
     <!-- Difficulty -->
       <div id="menu">

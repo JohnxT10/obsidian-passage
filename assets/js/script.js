@@ -103,6 +103,26 @@ function stopTimer() {
 // SCOREBOARD & MESSAGES
 // =========================
 
+function showVictoryMessage(moves) {
+    const messageDiv = document.getElementById('message');
+    messageDiv.classList.add('small-message');
+    messageDiv.innerHTML = `
+        <h1>Congratulations, ${username}!</h1>
+        <p>You found the exit, but the darkness lingers behind your eyes.</p>
+        <p>Will you tempt fate again, or has the passage marked you?</p>
+        <p>You moved ${moves} steps to escape.</p>
+        <input id="okBtn" class="app-btn" type="button" value="Tempt Fate Again">
+    `;
+    document.getElementById('message-container').style.display = 'block';
+
+    const okBtn = document.getElementById("okBtn");
+    if (okBtn) {
+        okBtn.onclick = function() {
+            document.getElementById('message-container').style.display = 'none';
+        };
+    }
+}
+
 // Show failure message
 function showFailureMessage() {
     const messageDiv = document.getElementById('message');
@@ -111,16 +131,19 @@ function showFailureMessage() {
     messageDiv.innerHTML = `
         <h1>Time Slips Away...</h1>
         <p>The shadows close in.</p>
-        <p>You are lost to the passage.</p>
+        <p>${username}, you are lost to the passage.</p>
         <p>Dare to tempt fate once more?</p>
         <input id="okBtn" class="app-btn" type="button" value="Try Again">
     `;
-    document.getElementById('message-container').style.visibility = 'visible';
+    document.getElementById('message-container').style.display = 'block';
 
     // Attach the event listener after the button is added to the DOM
-    document.getElementById("okBtn").addEventListener("click", function() {
-        toggleVisiblity('message-container');
-    });
+    const okBtn = document.getElementById("okBtn");
+    if (okBtn) {
+        okBtn.onclick = function() {
+            document.getElementById('message-container').style.display = 'none';
+        };
+    }
 }
 
 //   Update the scoreboard with the current maze stats
@@ -170,19 +193,10 @@ function updateScoreboard() {
 function displayVictoryMess(moves) {
     // Stop the timer when the user wins
     stopTimer(); 
-    document.getElementById("moves").innerHTML = "You Moved " + moves + " Steps To Escape.";
     // Track completion
     if (mazeStats[difficulty]) mazeStats[difficulty].completed++;
     updateScoreboard();
-    toggleVisiblity("message-container");  
-}
-  
-function toggleVisiblity(id) {
-    if (document.getElementById(id).style.visibility == "visible") {
-        document.getElementById(id).style.visibility = "hidden";
-    } else {
-        document.getElementById(id).style.visibility = "visible";
-    }
+    showVictoryMessage(moves);
 }
 
 // =========================
@@ -720,7 +734,67 @@ function makeMaze() {
 }
 
 // =========================
-// UI CONTROLS & EVENT HANDLERS
+// USERNAME PROMPT LOGIC & UI CONTROLS
+// =========================
+
+let username = null;
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Username logic
+    const usernameSection = document.getElementById("username-section");
+    const usernameInput = document.getElementById("username-input");
+    const usernameSubmit = document.getElementById("username-submit");
+
+    // Hide game UI initially
+    document.getElementById("menu").style.display = "none";
+    const timerElem = document.getElementById("timer");
+    if (timerElem) timerElem.style.display = "none";
+    const viewElem = document.getElementById("view");
+    if (viewElem) viewElem.style.display = "none";
+    const mobileControls = document.getElementById("mobile-controls");
+    if (mobileControls) mobileControls.style.display = "none";
+
+    // Username submit logic
+    usernameSubmit.addEventListener("click", function() {
+        const value = usernameInput.value.trim();
+        if (value.length === 0) {
+            usernameInput.focus();
+            usernameInput.placeholder = "Please enter a username!";
+            usernameInput.classList.add("error");
+            return;
+        }
+        username = value;
+        usernameInput.classList.remove("error");
+        // Hide username section, show game UI
+        usernameSection.style.display = "none";
+        document.getElementById("menu").style.display = "";
+        if (timerElem) timerElem.style.display = "";
+        if (viewElem) viewElem.style.display = "";
+        if (mobileControls) mobileControls.style.display = "";
+    });
+
+    // Remove error state on input
+    usernameInput.addEventListener("input", function() {
+        if (usernameInput.classList.contains("error")) {
+            usernameInput.classList.remove("error");
+            usernameInput.placeholder = "Your username";
+        }
+    });
+
+    // Allow Enter key to submit
+    usernameInput.addEventListener("keydown", function(e) {
+        if (e.key === "Enter") {
+            usernameSubmit.click();
+        }
+    });
+
+    // Start button
+    document.getElementById("startMazeBtn").addEventListener("click", makeMaze);
+});
+
+
+// =========================
+// UI CONTROLS & EVENT HANDLERS (outside DOMContentLoaded)
 // =========================
 
 // Arrow button controls
@@ -744,18 +818,3 @@ document.getElementById("arrow-right").addEventListener("click", function() {
     const e = { keyCode: 39 }; // Right arrow
     player && player["check"] && player["check"](e);
 });
-
-// Start the maze when the DOM is fully loaded
-document.addEventListener("DOMContentLoaded", function() {
-    // Start button
-    document.getElementById("startMazeBtn").addEventListener("click", makeMaze);
-
-    // Ok button (Tempt Fate)
-    const okBtn = document.getElementById("okBtn");
-    if (okBtn) {
-        okBtn.addEventListener("click", function() {
-            toggleVisiblity('message-container');
-        });
-    }
-});
-
