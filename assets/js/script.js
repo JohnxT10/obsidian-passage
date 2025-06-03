@@ -750,3 +750,8 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+
+// Automatically generate and show the maze on page load for screenshot purposes
+document.addEventListener("DOMContentLoaded", function() {
+    makeMaze();
+});
