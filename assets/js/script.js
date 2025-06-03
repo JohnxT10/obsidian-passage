@@ -630,7 +630,8 @@ function resizeMazeCanvas() {
     const dpr = window.devicePixelRatio || 1;
 
     // Use the smaller of the container's width or the window's height for a square
-    const maxSize = 500; // Match your CSS max-width
+    // Match your CSS max-width
+    const maxSize = 500; 
     const displaySize = Math.min(container.clientWidth, window.innerHeight * 0.6, maxSize);
 
     // Set the canvas pixel size for sharpness
@@ -643,8 +644,14 @@ function resizeMazeCanvas() {
 
     // Scale the context for high-DPI screens
     const ctx = canvas.getContext('2d');
-    ctx.setTransform(1, 0, 0, 1, 0, 0); // reset
+    // reset
+    ctx.setTransform(1, 0, 0, 1, 0, 0); 
     ctx.scale(dpr, dpr);
+
+       // --- Fix: recalculate cellSize based on new canvas size and difficulty ---
+       if (typeof difficulty !== "undefined" && difficulty) {
+        cellSize = displaySize / difficulty;
+    }
 
     // Only redraw if draw and player exist
     if (typeof draw !== "undefined" && draw && typeof draw.redrawMaze === "function") {
@@ -658,6 +665,7 @@ function resizeMazeCanvas() {
 window.onload = function() {
     resizeMazeCanvas();
 };
+
 window.onresize = resizeMazeCanvas;
 
 // Get the time limit based on the selected difficulty
@@ -751,7 +759,3 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-// Automatically generate and show the maze on page load for screenshot purposes
-document.addEventListener("DOMContentLoaded", function() {
-    makeMaze();
-});
