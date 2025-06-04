@@ -520,10 +520,10 @@ function DrawMaze(Maze, ctx, cellsize = null) {
 
 // Load player and goal images
 const playerImg = new Image();
-playerImg.src = "assets/images/player.png";
+playerImg.src = "assets/images/main/player.png";
 
 const goalImg = new Image();
-goalImg.src = "assets/images/goal.png";
+goalImg.src = "assets/images/main/goal.png";
 
 // maze won't start until both images are loaded
 let imagesLoaded = 0;
