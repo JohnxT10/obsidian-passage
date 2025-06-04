@@ -15,6 +15,10 @@ body.dark-mode {
     /* Light gray for dark mode */
     --maze-wall-color: #888888; 
     
+    background: -o-linear-gradient(top, var(--bg-gradient-top), var(--bg-gradient-bottom)); 
+    
+    background: -webkit-gradient(linear, left top, left bottom, from(var(--bg-gradient-top)), to(var(--bg-gradient-bottom))); 
+    
     background: linear-gradient(to bottom, var(--bg-gradient-top), var(--bg-gradient-bottom));
 }
 
@@ -35,6 +39,10 @@ body.light-mode {
     /* Dark gray for light mode */
     --maze-wall-color: #333333;
   
+    background: -o-linear-gradient(top, var(--bg-gradient-top), var(--bg-gradient-bottom));
+  
+    background: -webkit-gradient(linear, left top, left bottom, from(var(--bg-gradient-top)), to(var(--bg-gradient-bottom)));
+  
     background: linear-gradient(to bottom, var(--bg-gradient-top), var(--bg-gradient-bottom));
 }
 
@@ -52,10 +60,19 @@ body {
 /* 3. Layout Containers */
 #page {
     /* Enable flexbox */  
+    display: -webkit-box;  
+    display: -ms-flexbox;  
     display: flex;          
-    flex-direction: column;
-    align-items: center;    
-    justify-content: center;
+    -webkit-box-orient: vertical;          
+    -webkit-box-direction: normal;          
+        -ms-flex-direction: column;          
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;    
+    -webkit-box-pack: center;    
+        -ms-flex-pack: center;    
+            justify-content: center;
     /* Ensure the page fills the viewport */
     min-height: 100vh;   
     text-align: center; 
@@ -64,7 +81,8 @@ body {
     margin: auto;
     padding: 10px;
     height: 65px;
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
 }
 
 /* 4. Game Title heading */
@@ -92,15 +110,24 @@ body {
 ul {
     margin: 0.5rem auto 0 auto;
     padding-left: 1.5em;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
     width: fit-content;
     text-align: left;
 }
 
 /* 6. Username section styling */
 #username-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin-bottom: 20px;
 }
 
@@ -115,8 +142,40 @@ label {
   margin: 25px;
 }
 
+#username-input::-webkit-input-placeholder {
+    color: #aaaaaa;
+  }
+
+#username-input::-moz-placeholder {
+    color: #aaaaaa;
+  }
+
+#username-input:-ms-input-placeholder {
+    color: #aaaaaa;
+  }
+
+#username-input::-ms-input-placeholder {
+    color: #aaaaaa;
+  }
+
 #username-input::placeholder {
     color: #aaaaaa;
+  }
+  
+  #username-input.error::-webkit-input-placeholder {
+    color: #dc143c;
+  }
+  
+  #username-input.error::-moz-placeholder {
+    color: #dc143c;
+  }
+  
+  #username-input.error:-ms-input-placeholder {
+    color: #dc143c;
+  }
+  
+  #username-input.error::-ms-input-placeholder {
+    color: #dc143c;
   }
   
   #username-input.error::placeholder {
@@ -139,17 +198,68 @@ label {
     text-decoration: none;
     font-family: inherit;
     font-weight: 600;
-    box-shadow:
+    -webkit-box-shadow:
+    /* main shadow */
+    0 4px 12px rgba(0,0,0,0.25), 
+    /* inner shadow for depth */
+    0 1.5px 0 #222 inset;
+            box-shadow:
     /* main shadow */
     0 4px 12px rgba(0,0,0,0.25), 
     /* inner shadow for depth */
     0 1.5px 0 #222 inset;         
+    -webkit-transition: 
+    background 0.2s,
+    -webkit-box-shadow 0.15s,
+    -webkit-transform 0.1s;         
+    transition: 
+    background 0.2s,
+    -webkit-box-shadow 0.15s,
+    -webkit-transform 0.1s;         
+    -o-transition: 
+    box-shadow 0.15s,
+    transform 0.1s,
+    background 0.2s;         
     transition: 
     box-shadow 0.15s,
     transform 0.1s,
-    background 0.2s;
+    background 0.2s;         
+    transition: 
+    box-shadow 0.15s,
+    transform 0.1s,
+    background 0.2s,
+    -webkit-box-shadow 0.15s,
+    -webkit-transform 0.1s;
 }
 .app-btn:hover {
+    background:
+    /* Top layer */
+    -o-linear-gradient(
+      top,
+      rgba(0,0,0,0.25),
+      rgba(0,0,0,0.35)
+    ),
+    /* Bottom layer */
+    var(--bg-color);
+    background:
+    /* Top layer */
+    -webkit-gradient(
+      linear,
+      left top, left bottom,
+      from(rgba(0,0,0,0.25)),
+      to(rgba(0,0,0,0.35))
+    ),
+    /* Bottom layer */
+    var(--bg-color);
+    background:
+    /* Top layer */
+    -o-linear-gradient(
+      top,
+      rgba(0,0,0,0.25),
+      rgba(0,0,0,0.35)
+    ),
+    /* Bottom layer */
+    var(--bg-color);
     background:
     /* Top layer */
     linear-gradient(
@@ -159,14 +269,21 @@ label {
     ),
     /* Bottom layer */
     var(--bg-color);
+  -webkit-transition: background 0.2s;
+  -o-transition: background 0.2s;
   transition: background 0.2s;
 }
 
 .app-btn:active {
-    box-shadow:
+    -webkit-box-shadow:
       0 2px 4px rgba(0,0,0,0.18),
       0 1.5px 0 #222 inset;
-    transform: translateY(2px) scale(0.97);
+            box-shadow:
+      0 2px 4px rgba(0,0,0,0.18),
+      0 1.5px 0 #222 inset;
+    -webkit-transform: translateY(2px) scale(0.97);
+        -ms-transform: translateY(2px) scale(0.97);
+            transform: translateY(2px) scale(0.97);
     /* Opposite linear gradient to give a 3D look when pressed */
     background: var(--opposite-bg-color)
   }
@@ -206,10 +323,19 @@ select {
 #view {
     width: 100%;
     max-width: 600px;
-    flex: 1 0 auto;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 0 auto;
+            flex: 1 0 auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
 
 /* Maze Container */
@@ -255,10 +381,13 @@ select {
     top: 50%;
     left: 50%;
     /* centers the congrats message  */
-    transform: translate(-50%, -50%); 
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); 
     background: rgba(24, 24, 24, 0.85); /* dark semi-transparent underlay */
     border-radius: 16px;
-    box-shadow: 0 4px 32px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0 4px 32px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 32px rgba(0,0,0,0.3);
     padding: 24px;
 }
 
@@ -288,7 +417,14 @@ select {
 
 /* When the scoreboard numbers increase */
 .score-flash {
-  animation: flash-highlight 1.5s;
+  -webkit-animation: flash-highlight 1.5s;
+          animation: flash-highlight 1.5s;
+}
+
+@-webkit-keyframes flash-highlight {
+  0%   { background: #ffe066; color: #181818; }
+  70%  { background: #ffe066; color: #181818; }
+  100% { background: none; color: inherit; }
 }
 
 @keyframes flash-highlight {
@@ -318,27 +454,63 @@ select {
       background: var(--bg-color);
       border-radius: 8px;
       border: none;
+      display: -webkit-inline-box;
+      display: -ms-inline-flexbox;
       display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
       color: var(--secondary-text-color);
-      box-shadow:
+      -webkit-box-shadow:
+      /* main shadow */
+      0 4px 12px rgba(0,0,0,0.25), 
+      /* inner shadow for depth */
+      0 1.5px 0 #222 inset;
+              box-shadow:
       /* main shadow */
       0 4px 12px rgba(0,0,0,0.25), 
       /* inner shadow for depth */
       0 1.5px 0 #222 inset;         
+      -webkit-transition: 
+      background 0.2s,
+      -webkit-box-shadow 0.15s,
+      -webkit-transform 0.1s;         
+      transition: 
+      background 0.2s,
+      -webkit-box-shadow 0.15s,
+      -webkit-transform 0.1s;         
+      -o-transition: 
+      box-shadow 0.15s,
+      transform 0.1s,
+      background 0.2s;         
       transition: 
       box-shadow 0.15s,
       transform 0.1s,
-      background 0.2s;
+      background 0.2s;         
+      transition: 
+      box-shadow 0.15s,
+      transform 0.1s,
+      background 0.2s,
+      -webkit-box-shadow 0.15s,
+      -webkit-transform 0.1s;
       cursor: pointer;
+      -ms-touch-action: manipulation;
+          touch-action: manipulation;
     }
 
     .arrow-btn:active {
-        box-shadow:
+        -webkit-box-shadow:
           0 2px 4px rgba(0,0,0,0.18),
           0 1.5px 0 #222 inset;
-        transform: translateY(2px) scale(0.97);
+                box-shadow:
+          0 2px 4px rgba(0,0,0,0.18),
+          0 1.5px 0 #222 inset;
+        -webkit-transform: translateY(2px) scale(0.97);
+            -ms-transform: translateY(2px) scale(0.97);
+                transform: translateY(2px) scale(0.97);
          /* Opposite linear gradient to give a 3D look when pressed */
         background: var(--opposite-bg-color);
       }
@@ -352,11 +524,21 @@ select {
 @media only screen and (max-width: 500px) {
       /* For light mode to sit underneath difficulty and start button */
       #menu {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+                flex-direction: row;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
         gap: 5px;
         height: auto;
     }
@@ -371,7 +553,8 @@ select {
     #theme-toggle {
         max-width: 200px;
         margin-top: 8px;
-        flex-basis: 100%;
+        -ms-flex-preferred-size: 100%;
+            flex-basis: 100%;
         
     }
 }
@@ -387,4 +570,3 @@ select {
         width: 240px !important;
     }
 }
-

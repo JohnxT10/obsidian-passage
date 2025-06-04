@@ -150,34 +150,38 @@ function showFailureMessage() {
 function updateScoreboard() {
     const names = {10: "Easy", 15: "Medium", 25: "Hard", 38: "Extreme"};
     let html = "";
-    for (const diff in mazeStats) {
-        const stat = mazeStats[diff];
-        if (stat.attempts > 0) {
-            // Only display difficulties that have attempts
-            html += `<div><b>${names[diff]}</b>: <span class="score-completed" id="score-completed-${diff}">${stat.completed}</span>
-            completed out of <span class="score-attempts" id="score-attempts-${diff}">${stat.attempts}</span> 
-            attempt${stat.attempts > 1 ? "s" : ""}</div>`;
+        for (const diff in mazeStats) {
+        if (mazeStats.hasOwnProperty(diff)) {
+            const stat = mazeStats[diff];
+            if (stat.attempts > 0) {
+                // Only display difficulties that have attempts
+                html += `<div><b>${names[diff]}</b>: <span class="score-completed" id="score-completed-${diff}">${stat.completed}</span>
+                completed out of <span class="score-attempts" id="score-attempts-${diff}">${stat.attempts}</span> 
+                attempt${stat.attempts > 1 ? "s" : ""}</div>`;
+            }
         }
     }
     const scoreboard = document.getElementById("scoreboard");
     scoreboard.innerHTML = html;
 
     // Highlight if numbers increased
-    for (const diff in mazeStats) {
-        const stat = mazeStats[diff];
-        if (prevStats[diff]) {
-            if (stat.completed > prevStats[diff].completed) {
-                const el = document.getElementById(`score-completed-${diff}`);
-                if (el) {
-                    el.classList.add("score-flash");
-                    setTimeout(() => el.classList.remove("score-flash"), 700);
+        for (const diff in mazeStats) {
+        if (mazeStats.hasOwnProperty(diff)) {
+            const stat = mazeStats[diff];
+            if (prevStats[diff]) {
+                if (stat.completed > prevStats[diff].completed) {
+                    const el = document.getElementById(`score-completed-${diff}`);
+                    if (el) {
+                        el.classList.add("score-flash");
+                        setTimeout(() => el.classList.remove("score-flash"), 700);
+                    }
                 }
-            }
-            if (stat.attempts > prevStats[diff].attempts) {
-                const el = document.getElementById(`score-attempts-${diff}`);
-                if (el) {
-                    el.classList.add("score-flash");
-                    setTimeout(() => el.classList.remove("score-flash"), 700);
+                if (stat.attempts > prevStats[diff].attempts) {
+                    const el = document.getElementById(`score-attempts-${diff}`);
+                    if (el) {
+                        el.classList.add("score-flash");
+                        setTimeout(() => el.classList.remove("score-flash"), 700);
+                    }
                 }
             }
         }
@@ -800,21 +804,32 @@ document.addEventListener("DOMContentLoaded", function() {
 // Arrow button controls
 document.getElementById("arrow-up").addEventListener("click", function() {
     if (player) player.bindKeyDown();
-    const e = { keyCode: 38 }; // Up arrow
-    player && player["check"] && player["check"](e);
-});
+    // Up arrow
+    const e = { keyCode: 38 }; 
+    if (player && typeof player.check === "function") {
+        player.check(e);
+    }});
 document.getElementById("arrow-down").addEventListener("click", function() {
     if (player) player.bindKeyDown();
-    const e = { keyCode: 40 }; // Down arrow
-    player && player["check"] && player["check"](e);
+    // Down arrow
+    const e = { keyCode: 40 }; 
+     if (player && typeof player.check === "function") {
+        player.check(e);
+    }
 });
 document.getElementById("arrow-left").addEventListener("click", function() {
     if (player) player.bindKeyDown();
-    const e = { keyCode: 37 }; // Left arrow
-    player && player["check"] && player["check"](e);
+    // Left arrow
+    const e = { keyCode: 37 }; 
+       if (player && typeof player.check === "function") {
+        player.check(e);
+    }
 });
 document.getElementById("arrow-right").addEventListener("click", function() {
     if (player) player.bindKeyDown();
-    const e = { keyCode: 39 }; // Right arrow
-    player && player["check"] && player["check"](e);
+    // Right arrow
+    const e = { keyCode: 39 }; 
+       if (player && typeof player.check === "function") {
+        player.check(e);
+    }
 });

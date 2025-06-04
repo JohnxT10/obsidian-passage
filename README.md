@@ -5,12 +5,15 @@
 A mysterious, atmospheric maze game for the web.
 
 ---
-Obsidian Passage is a browser-based maze game with a dark, mysterious theme. Each playthrough generates a unique maze for you to solve before time runs out. Enter your name, explore the passage, and race against the clock—playable on both desktop and mobile, no installation required.
+## Introduction
+
+Obsidian Passage is a one-page browser-based maze game with a dark, mysterious theme. Each playthrough generates a unique maze for you to solve before time runs out. Enter your name, explore the passage, and race against the clock—playable on both desktop and mobile, no installation required.
 
 ![Obsidian Passage multiview image](assets/images/readme/wireframes/multiview-wireframe.png)
 
 ## 📖 Table of Contents
 
+- [📝 Introuction](#introduction)
 - [📌 Project Overview](#project-overview)
 - [🖥️ UX/UI Design](#uxui-design)
 - [🧑‍🚶‍♂️ User Stories](#️user-stories)
@@ -31,8 +34,12 @@ Obsidian Passage is a browser-based maze game with a dark, mysterious theme. Eac
 ---
 
 ## Project Overview
+**Key Objectives:**  
 
-Obsidian Passage is a browser-based maze game with an eerie, immersive theme. Players must navigate through procedurally generated mazes before time runs out.
+- Create an engaging, interactive maze game that runs entirely in the browser using **HTML, CSS, and JavaScript**. .
+- Deliver a seamless experience across devices with a focus on accessibility and modern design.
+- Maintain clean, standards-compliant code validated by industry tools such as **W3C Validator**, .
+- Make the game easily accessible online through version control and web hosting.
 
 ---
 
