@@ -137,6 +137,7 @@ label {
     text-shadow: 0 0 8px rgba(0,0,0,0.7);
 }
 
+/* Username section */
 #username-input {
   width: 220px;
   margin: 25px;
@@ -243,6 +244,15 @@ label {
     var(--bg-color);
     background:
     /* Top layer */
+    -o-linear-gradient(
+      top,
+      rgba(0,0,0,0.25),
+      rgba(0,0,0,0.35)
+    ),
+    /* Bottom layer */
+    var(--bg-color);
+    background:
+    /* Top layer */
     -webkit-gradient(
       linear,
       left top, left bottom,
@@ -292,6 +302,34 @@ label {
     outline: none;
 }
 
+/* Add spacing between restart/cancel button */
+.restart-btn-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1em;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 1em;
+}
+
+.restart-btn-row .app-btn {
+  width: auto !important;
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  padding-left: 1em;
+  padding-right: 1em;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+/* For the difficulty */
 .custom-select {
     display: inline-block;
 }

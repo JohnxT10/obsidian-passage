@@ -1,3 +1,6 @@
+// This is to prevent any warning about ES6 features on JSHint
+/* jshint esversion: 6 */
+
 // =========================
 // THEME TOGGLE
 // =========================
@@ -144,6 +147,30 @@ function showFailureMessage() {
             document.getElementById('message-container').style.display = 'none';
         };
     }
+}
+
+// Restart maze confirmation message
+function showRestartMessage(onConfirm) {
+    const messageDiv = document.getElementById('message');
+    messageDiv.classList.add('small-message');
+    messageDiv.innerHTML = `
+        <h1>The Passage Whispers...</h1>
+        <p>The shadows shift—your journey is not yet over.</p>
+        <p>Are you certain you wish to abandon this path and face a new darkness?</p>
+        <div class="restart-btn-row">
+        <input id="confirmRestartBtn" class="app-btn" type="button" value="Embrace the Unknown">
+        <input id="cancelRestartBtn" class="app-btn" type="button" value="Remain in the Shadows">
+        </div>
+    `;
+    document.getElementById('message-container').style.display = 'block';
+
+    document.getElementById("confirmRestartBtn").onclick = function() {
+        document.getElementById('message-container').style.display = 'none';
+        if (typeof onConfirm === "function") onConfirm();
+    };
+    document.getElementById("cancelRestartBtn").onclick = function() {
+        document.getElementById('message-container').style.display = 'none';
+    };
 }
 
 //   Update the scoreboard with the current maze stats
@@ -793,7 +820,13 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Start button
-    document.getElementById("startMazeBtn").addEventListener("click", makeMaze);
+    document.getElementById("startMazeBtn").addEventListener("click", function() {
+        if (mazeActive && timeRemaining > 0) {
+            showRestartMessage(makeMaze);
+        } else {
+            makeMaze();
+        }
+    });
 });
 
 
