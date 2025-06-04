@@ -155,7 +155,7 @@ function showRestartMessage(onConfirm) {
     messageDiv.classList.add('small-message');
     messageDiv.innerHTML = `
         <h1>The Passage Whispers...</h1>
-        <p>The shadows shift—your journey is not yet over.</p>
+        <p>The shadows shift — your journey is not yet over.</p>
         <p>Are you certain you wish to abandon this path and face a new darkness?</p>
         <div class="restart-btn-row">
         <input id="confirmRestartBtn" class="app-btn" type="button" value="Embrace the Unknown">
@@ -798,6 +798,7 @@ document.addEventListener("DOMContentLoaded", function() {
         usernameInput.classList.remove("error");
         // Hide username section, show game UI
         usernameSection.style.display = "none";
+        document.getElementById("about-section").style.display = "none";
         document.getElementById("menu").style.display = "";
         if (timerElem) timerElem.style.display = "";
         if (viewElem) viewElem.style.display = "";

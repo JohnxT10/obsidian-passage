@@ -95,10 +95,23 @@ body {
     color: var(--primary-text-color);
 }
 
+/* About section */
+.about-section {
+    color: var(--primary-text-color);
+    max-width: 500px;
+    margin: 0 auto 1.5em auto;
+    text-align: center;
+    background: linear-gradient(135deg, #232323 60%, #181818 100%);
+    border-radius: 18px;
+    box-shadow: 0 6px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.25) inset;
+    padding: 1.5em 1.2em;
+    border: 1.5px solid rgba(80,80,80,0.5);
+}
+
 /* 5. How to play instructions */
 #how-to-play {
     color: var(--primary-text-color);
-    margin-bottom: 1em;
+    margin: 1rem 0;
 }
 
 .how-to-summary {
@@ -558,7 +571,15 @@ select {
       }
   }
 
-/* 12. Responsive: small/medium devices */
+  /* 12. About section to make it responsive - 80% width on screens <= 600px */
+  @media only screen and (max-width: 600px) {
+    .about-section {
+        width: 80%;
+        max-width: 80%;
+    }
+}
+
+/* 13. Responsive: small/medium devices */
 @media only screen and (max-width: 500px) {
       /* For light mode to sit underneath difficulty and start button */
       #menu {

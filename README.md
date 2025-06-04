@@ -4,8 +4,13 @@
 
 A mysterious, atmospheric maze game for the web.
 
+### **Live Website**
+🔗 **Play the Game Here:** [Obsidian Passage](https://johnxt10.github.io/obsidian-passage/)  
+
+
+
 ---
-## Introduction
+## **Introduction**
 
 Obsidian Passage is a one-page browser-based maze game with a dark, mysterious theme. Each playthrough generates a unique maze for you to solve before time runs out. Enter your name, explore the passage, and race against the clock—playable on both desktop and mobile, no installation required.
 
@@ -32,7 +37,7 @@ Obsidian Passage is a one-page browser-based maze game with a dark, mysterious t
 
 ---
 
-## Project Overview
+## **Project Overview**
 **Key Objectives:**  
 
 - Create an engaging, interactive maze game that runs entirely in the browser using **HTML, CSS, and JavaScript**. .
@@ -42,7 +47,7 @@ Obsidian Passage is a one-page browser-based maze game with a dark, mysterious t
 
 ---
 
-## UX/UI Design
+## **UX/UI Design**
 
 - Dark, atmospheric interface inspired by mysterious passages and ancient ruins.
 - Responsive layout for desktop and mobile.
@@ -61,9 +66,7 @@ Obsidian Passage is a one-page browser-based maze game with a dark, mysterious t
 
 ---
 
-## Design Choices
-
-### Colours
+## **Design Choices**
 
 ### Colours
 
@@ -71,12 +74,12 @@ A great deal of thought went into selecting each colour for Obsidian Passage. Th
 
 | Colour Name   | Value                                 | Usage                        |
 |---------------|---------------------------------------|------------------------------|
-| **Obsidian Black**| `#1a1a1a`                             | Background, modal overlays   |
-| **Light Grey**    | `#e0e0e0`                             | Text, borders, highlights    |
-| **Dark Red**      | `#8B0000`                             | Error messages, timer warning|
-| **Green**         | `#4caf50`                             | Success, completion feedback |
-| **Button Gradient** | `linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.35))` | Button backgrounds           |
-| **Opposite BG**   | `var(--opposite-bg-color)`            | Button active/pressed state  |
+| ⚫️ **Obsidian Black**| `#1a1a1a`                             | Background, modal overlays   |
+| ⚪️ **Light Grey**    | `(var--primary-text-color), var(--secondary-text-color)`                             | Text, borders, highlights    |
+| 🔴 **Dark Red**      | `#dc143c`                             | Error messages, timer warning|
+| 🟢 **Green**         | `#4caf50`                             | Success, completion feedback |
+| **Button Gradient** | `var(--bg-color)` | Button backgrounds           |
+| 🟢🟣 **Opposite BG**   | `var(--opposite-bg-color)`            | Button active/pressed state  |
 
 *(See `assets/css/styles.css` for the full palette and implementation details.)*
 
@@ -84,22 +87,23 @@ A great deal of thought went into selecting each colour for Obsidian Passage. Th
 
 ### Fonts
 
-- [Cinzel](https://fonts.google.com/specimen/Cinzel) for headings
-- [EB Garamond](https://fonts.google.com/specimen/EB+Garamond) for body text
+This website uses **Cinzel** and EB **Garamond**. These typefaces were chosen to evoke an eerie, ancient atmosphere, enhancing the game’s mysterious and unsettling mood while maintaining readability across all devices.feeling
 
 ---
 
 ### Structure
 
+The website will follow a **mobile-first** strategy, the main target is to create a visually appealing design for smaller screens. Also making sure that it's responsive on all devices.
+
 ---
 
-## Wireframes
+## **Wireframes**
 
 *(Add or link to your wireframes here)*
 
 ---
 
-## Imagery
+## **Imagery**
 
 - Custom favicons and icons in `assets/images/favicon/`
 - Themed background and UI elements for an immersive experience
@@ -164,3 +168,7 @@ A great deal of thought went into selecting each colour for Obsidian Passage. Th
 ---
 
 *Feel free to expand each section as your project evolves!*
+
+
+- [Cinzel](https://fonts.google.com/specimen/Cinzel) for headings
+- [EB Garamond](https://fonts.google.com/specimen/EB+Garamond) for body text
