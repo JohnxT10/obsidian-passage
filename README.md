@@ -13,7 +13,6 @@ Obsidian Passage is a one-page browser-based maze game with a dark, mysterious t
 
 ## 📖 Table of Contents
 
-- [📝 Introuction](#introduction)
 - [📌 Project Overview](#project-overview)
 - [🖥️ UX/UI Design](#uxui-design)
 - [🧑‍🚶‍♂️ User Stories](#️user-stories)
@@ -39,7 +38,7 @@ Obsidian Passage is a one-page browser-based maze game with a dark, mysterious t
 - Create an engaging, interactive maze game that runs entirely in the browser using **HTML, CSS, and JavaScript**. .
 - Deliver a seamless experience across devices with a focus on accessibility and modern design.
 - Maintain clean, standards-compliant code validated by industry tools such as **W3C Validator**, .
-- Make the game easily accessible online through version control and web hosting.
+- Make the game easily accessible online through version control and web hosting - deployed using **Github pages**.
 
 ---
 
@@ -51,12 +50,14 @@ Obsidian Passage is a one-page browser-based maze game with a dark, mysterious t
 
 ---
 
-## User Stories
-
-- As a player, I want to enter my name and see it in-game.
-- As a player, I want to navigate the maze using keyboard or touch controls.
-- As a player, I want to see a timer and my score.
-- As a player, I want to try again after winning or losing.
+### User Stories
+**As a player, I want to...**  
+- Enter my name and see it in-game.
+- Navigate the maze using keyboard or touch controls.
+- See a timer and my score.
+- Try again after winning or losing.
+- See button controls for smaller devices.
+- Use on-screen buttons for movement on mobile without affecting other page elements.
 
 ---
 
@@ -64,11 +65,20 @@ Obsidian Passage is a one-page browser-based maze game with a dark, mysterious t
 
 ### Colours
 
-- Primary: `#1a1a1a` (Obsidian Black)
-- Accent: `#e0e0e0` (Light Grey)
-- Error: `#8B0000` (Dark Red)
-- Success: `#4caf50` (Green)
-- (See `assets/css/styles.css` for full palette.)
+### Colours
+
+A great deal of thought went into selecting each colour for Obsidian Passage. The palette was chosen to create a mysterious, immersive atmosphere while ensuring **accessibility** and **clarity**. Each colour serves a specific purpose, from guiding the player’s focus to providing clear feedback for actions and states.
+
+| Colour Name   | Value                                 | Usage                        |
+|---------------|---------------------------------------|------------------------------|
+| **Obsidian Black**| `#1a1a1a`                             | Background, modal overlays   |
+| **Light Grey**    | `#e0e0e0`                             | Text, borders, highlights    |
+| **Dark Red**      | `#8B0000`                             | Error messages, timer warning|
+| **Green**         | `#4caf50`                             | Success, completion feedback |
+| **Button Gradient** | `linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.35))` | Button backgrounds           |
+| **Opposite BG**   | `var(--opposite-bg-color)`            | Button active/pressed state  |
+
+*(See `assets/css/styles.css` for the full palette and implementation details.)*
 
 ---
 
