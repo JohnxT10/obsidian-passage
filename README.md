@@ -14,7 +14,7 @@ A mysterious, atmospheric maze game for the web.
 
 Obsidian Passage is a one-page browser-based maze game with a dark, mysterious theme. Each playthrough generates a unique maze for you to solve before time runs out. Enter your name, explore the passage, and race against the clock—playable on both desktop and mobile, no installation required.
 
-![Obsidian Passage multiview image](assets/images/readme/wireframes/multiview-wireframe.png)
+![Obsidian Passage multiview image](readme/wireframes/multiview-wireframe.png)
 
 ## 📖 Table of Contents
 
@@ -99,7 +99,11 @@ The website will follow a **mobile-first** strategy, the main target is to creat
 
 ## **Wireframes**
 
-*(Add or link to your wireframes here)*
+### [Desktop Wireframe](readme/wireframes/desktop.png "Desktop wireframe")
+
+### [Tablet Wireframe](readme/wireframes/tablet.png "Tablet wireframe")
+
+### [Phone Wireframe](readme/wireframes/phone.png "Phone wireframe")
 
 ---
 
