@@ -1,6 +1,6 @@
 # Obsidian Passage 
 
-<img src="assets/images/readme/obsidian-logo.jpeg" alt="Logo" width="200" height="200">
+<img src="readme/obsidian-logo.jpeg" alt="Logo" width="200" height="200">
 
 A mysterious, atmospheric maze game for the web.
 
@@ -42,7 +42,7 @@ Obsidian Passage is a one-page browser-based maze game with a dark, mysterious t
 
 - Create an engaging, interactive maze game that runs entirely in the browser using **HTML, CSS, and JavaScript**. .
 - Deliver a seamless experience across devices with a focus on accessibility and modern design.
-- Maintain clean, standards-compliant code validated by industry tools such as **W3C Validator**, .
+- Maintain clean, standards-compliant code validated by industry tools such as **W3C Validator**.
 - Make the game easily accessible online through version control and web hosting - deployed using **Github pages**.
 
 ---
@@ -154,48 +154,72 @@ The wireframes are provided below:
 ---
 
 ## Testing
+
 - **HTML Validation** - Used **W3C Validator**.
+  ![W3C HTML Validation Screenshot](readme/testing/html.jpeg)
 
-- **CSS Validation** - Used **Autoprefixers** so that the styles work across different browsers. Then used **Jigsaw Validator**.  
+- **CSS Validation** - Used **Autoprefixer** for cross-browser compatibility, then **Jigsaw Validator**.
+  ![CSS Autoprefixer](readme/testing/autoprefixer.jpeg)
+  ![CSS Jigsaw Validation Screenshot](readme/testing/css.jpeg)
 
-- **JavaScript Debugging** - JShint, Console log & error fixing
+- **JavaScript Debugging** - JSHint, console log & error fixing.
+  ![JSHint Validation Screenshot](readme/testing/js.jpeg)
 
-- ✅ **Lighthouse Performance Testing** – Checked for **performance**, **speed** and **accessibility**.  
+- ✅ **Lighthouse Performance Testing** – Checked for **performance**, **SEO**, and **accessibility**.
+  ![Lighthouse Report Screenshot](readme/testing/lighthouse.jpeg)
+
 
 ---
 
 ## Deployment
+### Deployed using Github Pages
 
-- Static site: open `index.html` in your browser
-- (Optional: add deployment link if hosted online)
+**Live Website** [Obsidian Passage](https://johnxt10.github.io/obsidian-passage/)  
 
 ---
 
 ## Future Features
 
-- Maze themes/skins
-- Sound effects and music
-- Leaderboard and persistent scores
-- Accessibility improvements
+- **Maze themes/skins:** Let users choose different visual themes (e.g., ancient ruins, neon, forest).
+- **Leaderboard and persistent scores:** Track high scores and fastest times globally or per user.
+- **Statistics dashboard:** Show detailed stats (e.g., average completion time, moves per game).
+- **Hints or power-ups:** Optional features to help players (e.g., reveal part of the maze, freeze timer).
+- **Save and resume:** Let players save their progress and continue later.
 
 ---
 
-## Known Bugs
+## Bugs
 
-- (List any known issues here)
+### Fixed Bugs
+
+- Player and Goal image not loading before game start: Disabled the start button until both player and goal images were loaded.
+- Victory message not appearing after maze completion: Fixed event handling to ensure the victory modal always displays when the player reaches the goal.
+
+## Unfixed Bugs
+
+- There are no unfixed bugs.
 
 ---
 
 ## Citation
 
-- Maze generation inspired by [source, if any].
-- Fonts by Google Fonts.
-- Icons generated via [RealFaviconGenerator](https://realfavicongenerator.net/).
+The following resources were used in the development of **Obsidian Passage**:
+
+### 🎨 Fonts
+- **Cinzel** font from [Google Fonts](https://fonts.google.com/specimen/Cinzel)
+- **EB Garamond** font from [Google Fonts](https://fonts.google.com/specimen/EB+Garamond)
+
+### 🖼️ Images & Icons
+
+- Player and goal images were produced using GitHub Copilot.
+- Favicon and icon set generated with [favicon.io](https://favicon.io/).
+
+### 🛠️ Libraries & Frameworks
+- **HTML & CSS Autoprefixer/Validation Tools**: [W3C Validator](https://validator.w3.org/), [CSS Autoprefixer](https://autoprefixer.github.io/) & [Jigsaw CSS Validator](https://jigsaw.w3.org/css-validator/)
+- **JavaScript Debugging**: Chrome DevTools [Documentation](https://developer.chrome.com/docs/devtools/). Also [JShint](https://jshint.com/)
+- **GitHub Hosting**: Project is hosted using [GitHub Pages](https://pages.github.com/)
 
 ---
 
-*Feel free to expand each section as your project evolves!*
-
-
-- [Cinzel](https://fonts.google.com/specimen/Cinzel) for headings
-- [EB Garamond](https://fonts.google.com/specimen/EB+Garamond) for body text
+We hope you enjoyed exploring the depths of Obsidian Passage.  
+If you have feedback, suggestions, or just want to share your high score, feel free to reach out!
