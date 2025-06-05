@@ -99,6 +99,8 @@ The website will follow a **mobile-first** strategy, the main target is to creat
 
 ## **Wireframes**
 
+The wireframes are provided below:
+
 ### [Desktop Wireframe](readme/wireframes/desktop.png "Desktop wireframe")
 
 ### [Tablet Wireframe](readme/wireframes/tablet.png "Tablet wireframe")
@@ -109,35 +111,56 @@ The website will follow a **mobile-first** strategy, the main target is to creat
 
 ## **Imagery**
 
-- Custom favicons and icons in `assets/images/favicon/`
-- Themed background and UI elements for an immersive experience
+- Custom favicon and icon set located in `assets/images/favicon/` for a polished, branded experience.
+- Themed backgrounds and UI elements designed to immerse players in a mysterious, ancient atmosphere.
+- All imagery and visual assets are optimized for both desktop and mobile displays.
+- Game sprites (player and goal) were produced using AI Copilot to match the eerie aesthetic of the passage.
 
 ---
 
 ## Features
 
-- Procedural maze generation
-- Timer and scoreboard
-- Themed victory and failure messages
-- Keyboard and touch controls
-- Responsive design
-- Customizable difficulty
+### Core Gameplay
+- Procedural maze generation for unique playthroughs every time
+- Customizable difficulty levels (Easy, Medium, Hard, Extreme)
+- Timer and scoreboard to track performance
+- Themed victory and failure messages for immersive feedback
+- Keyboard and touch controls for cross-device play
+
+### UI & Experience
+- Responsive design for seamless play on desktop and mobile
+- On-screen arrow controls for mobile users
+- Light/Dark mode toggle for accessibility and mood
+- Enter your name for a personalized experience
+- Themed backgrounds, icons, and custom sprites for atmosphere
+- Animated transitions and feedback for player actions
 
 ---
 
 ## Built With
-
-- HTML5, CSS3, JavaScript (Vanilla)
+### 🖥️ **Technology & Languages**  
+- HTML, CSS, JavaScript (Vanilla)
 - [Google Fonts](https://fonts.google.com/)
-- [RealFaviconGenerator](https://realfavicongenerator.net/) for icons
+- [favicon-converter](https://favicon.io/favicon-converter/) for icons
+
+### Libraries & Frameworks
+- Google Fonts (**Cinzel** and **EB Garamond**)
+
+### 🛠️ **Tools Used**  
+- **GitHub** – Version control & deployment  
+- **VS Code** – Code editor  
+- **Chrome DevTools** – Debugging & testing  
 
 ---
 
 ## Testing
+- **HTML Validation** - Used **W3C Validator**.
 
-- Manual testing on Chrome, Firefox, and Safari
-- Responsive checks on desktop and mobile
-- User input validation and error handling
+- **CSS Validation** - Used **Autoprefixers** so that the styles work across different browsers. Then used **Jigsaw Validator**.  
+
+- **JavaScript Debugging** - JShint, Console log & error fixing
+
+- ✅ **Lighthouse Performance Testing** – Checked for **performance**, **speed** and **accessibility**.  
 
 ---
 
