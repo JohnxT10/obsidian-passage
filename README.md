@@ -221,5 +221,5 @@ The following resources were used in the development of **Obsidian Passage**:
 
 ---
 
-We hope you enjoyed exploring the depths of Obsidian Passage.  
-If you have feedback, suggestions, or just want to share your high score, feel free to reach out!
+We hope you enjoyed exploring the depths of Obsidian Passage 🎊.  
+If you have feedback, suggestions, or just want to share your high score, feel free to reach out! 📝 
