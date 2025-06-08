@@ -4,28 +4,39 @@
 // =========================
 // THEME TOGGLE
 // =========================
-
+console.log("Script loaded!");
 // Light/Dark Mode Toggle
-const btn = document.getElementById("theme-toggle");
-btn.addEventListener("click", function() {
-    document.body.classList.toggle("light-mode");
-    document.body.classList.toggle("dark-mode");
+document.addEventListener("DOMContentLoaded", function() {
+    const btn = document.getElementById("theme-toggle");
+    console.log('Theme toggle button:', btn); 
 
-    // Change button text based on current mode
+    // Set the correct button text on page load
     if (document.body.classList.contains("light-mode")) {
-        btn.textContent = "Dark Mode";
+        btn.value = "Dark Mode";
     } else {
-        btn.textContent = "Light Mode";
+        btn.value = "Light Mode";
     }
 
-    // Redraw the maze with the new color
-    if (draw && typeof draw.redrawMaze === "function") {
-        draw.redrawMaze(cellSize);
-        // Redraw the player at their current position so that it doesn't get lost
-        if (player && typeof player.redrawPlayer === "function") {
-            player.redrawPlayer(cellSize);
+    btn.addEventListener("click", function() {
+        document.body.classList.toggle("light-mode");
+        document.body.classList.toggle("dark-mode");
+
+        // Change button text based on current mode
+        if (document.body.classList.contains("light-mode")) {
+            btn.value = "Dark Mode";
+        } else {
+            btn.value = "Light Mode";
         }
-    }
+
+        // Redraw the maze with the new color
+        if (typeof draw !== "undefined" && draw && typeof draw.redrawMaze === "function") {
+            draw.redrawMaze(cellSize);
+            // Redraw the player at their current position so that it doesn't get lost
+            if (typeof player !== "undefined" && player && typeof player.redrawPlayer === "function") {
+                player.redrawPlayer(cellSize);
+            }
+        }
+    });
 });
 
 // =========================
