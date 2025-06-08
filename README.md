@@ -1,6 +1,6 @@
 # Obsidian Passage 
 
-<img src="readme/obsidian-logo.jpeg" alt="Logo" width="200" height="200">
+<img src="assets/images/readme/obsidian-logo.jpeg" alt="Logo" width="200" height="200">
 
 A mysterious, atmospheric maze game for the web.
 
@@ -14,7 +14,7 @@ A mysterious, atmospheric maze game for the web.
 
 Obsidian Passage is a one-page browser-based maze game with a dark, mysterious theme. Each playthrough generates a unique maze for you to solve before time runs out. Enter your name, explore the passage, and race against the clock—playable on both desktop and mobile, no installation required.
 
-![Obsidian Passage multiview image](readme/wireframes/multiview-wireframe.png)
+![Obsidian Passage multiview image](assets/images/readme/wireframes/multiview-wireframe.png)
 
 ## 📖 Table of Contents
 
@@ -101,11 +101,15 @@ The website will follow a **mobile-first** strategy, the main target is to creat
 
 The wireframes are provided below:
 
-### [Desktop Wireframe](readme/wireframes/desktop.png "Desktop wireframe")
+### Multiview Wireframe – Homepage on all devices
+![Multiview image](assets/images/readme/wireframes/multiview.png)
 
-### [Tablet Wireframe](readme/wireframes/tablet.png "Tablet wireframe")
+### **Individual Wireframes**
+### [Desktop Wireframe](assets/images/readme/wireframes/desktop.png "Desktop wireframe")
 
-### [Phone Wireframe](readme/wireframes/phone.png "Phone wireframe")
+### [Tablet Wireframe](assets/images/readme/wireframes/tablet.png "Tablet wireframe")
+
+### [Phone Wireframe](assets/images/readme/wireframes/phone.png "Phone wireframe")
 
 ---
 
@@ -156,17 +160,17 @@ The wireframes are provided below:
 ## Testing
 
 - **HTML Validation** - Used **W3C Validator**.
-  ![W3C HTML Validation Screenshot](readme/testing/html.jpeg)
+  ![W3C HTML Validation Screenshot](assets/images/readme/testing/html.jpeg)
 
 - **CSS Validation** - Used **Autoprefixer** for cross-browser compatibility, then **Jigsaw Validator**.
-  ![CSS Autoprefixer](readme/testing/autoprefixer.jpeg)
-  ![CSS Jigsaw Validation Screenshot](readme/testing/css.jpeg)
+  ![CSS Autoprefixer](assets/images/readme/testing/autoprefixer.jpeg)
+  ![CSS Jigsaw Validation Screenshot](assets/images/readme/testing/css.jpeg)
 
 - **JavaScript Debugging** - JSHint, console log & error fixing.
-  ![JSHint Validation Screenshot](readme/testing/js.jpeg)
+  ![JSHint Validation Screenshot](assets/images/readme/testing/js.jpeg)
 
 - ✅ **Lighthouse Performance Testing** – Checked for **performance**, **SEO**, and **accessibility**.
-  ![Lighthouse Report Screenshot](readme/testing/lighthouse.jpeg)
+  ![Lighthouse Report Screenshot](assets/images/readme/testing/lighthouse.jpeg)
 
 
 ---
