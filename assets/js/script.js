@@ -56,9 +56,14 @@ const mazeStats = {
 };
 
 // Timer state
+
+// Set the initial time limit for the maze based on difficulty
 let timeLimit;
+// How much time you have left
 let timeRemaining;
+// Helps the game know when to stop or reset the timer
 let timerInterval = null;
+// Helps the game know whether to keep the timer running
 let mazeActive = false;
 
 // Scoreboard state
@@ -77,15 +82,20 @@ function formatTime(seconds) {
 
 // Call this when the maze starts
 function startTimer() {
-    /* When start button is pressed the interval are the same and 
-    not going down faster */
+    // When start button is pressed the intervals are the same and not going down faster 
+    // This stops any previous timer that might be running
     clearInterval(timerInterval);
+    // Reset the time remaining to the time limit
     timeRemaining = timeLimit;
     const timeElem = document.getElementById('time-remaining');
-    // <-- Reset color immediately so the first second in the maze isn't red!
+    // Reset color immediately so the first second in the maze isn't red!
     timeElem.style.color = ''; 
+    // Set the initial time display
     timeElem.textContent = formatTime(timeRemaining);
+    // Start the timer when the maze is created
     mazeActive = true;
+
+    // Clear any existing timer interval
     timerInterval = setInterval(() => {
         if (!mazeActive) return;
         timeRemaining--;
@@ -99,6 +109,7 @@ function startTimer() {
             timeElem.style.color = ''; 
         }
 
+        // If time runs out, stop the timer and show failure message
         if (timeRemaining <= 0) {
             clearInterval(timerInterval);
             mazeActive = false;
@@ -129,6 +140,7 @@ function showVictoryMessage(moves) {
     `;
     document.getElementById('message-container').style.display = 'block';
 
+    // Makes pop up message disappear when the button is clicked
     const okBtn = document.getElementById("okBtn");
     if (okBtn) {
         okBtn.onclick = function() {
@@ -175,10 +187,13 @@ function showRestartMessage(onConfirm) {
     `;
     document.getElementById('message-container').style.display = 'block';
 
+    // Attach event listeners to the buttons
+    // Confirm restart button
     document.getElementById("confirmRestartBtn").onclick = function() {
         document.getElementById('message-container').style.display = 'none';
         if (typeof onConfirm === "function") onConfirm();
     };
+    // Cancel restart button
     document.getElementById("cancelRestartBtn").onclick = function() {
         document.getElementById('message-container').style.display = 'none';
     };
@@ -186,8 +201,11 @@ function showRestartMessage(onConfirm) {
 
 //   Update the scoreboard with the current maze stats
 function updateScoreboard() {
+    // Names for each difficulty
     const names = {10: "Easy", 15: "Medium", 25: "Hard", 38: "Extreme"};
+    // Build the scoreboard 
     let html = "";
+    // Loops through each difficulty in mazeStats
         for (const diff in mazeStats) {
         if (mazeStats.hasOwnProperty(diff)) {
             const stat = mazeStats[diff];
@@ -199,24 +217,33 @@ function updateScoreboard() {
             }
         }
     }
+    // Update the scoreboard on the page
     const scoreboard = document.getElementById("scoreboard");
     scoreboard.innerHTML = html;
 
     // Highlight if numbers increased
+    // Loops through each difficulty in mazeStats
         for (const diff in mazeStats) {
         if (mazeStats.hasOwnProperty(diff)) {
             const stat = mazeStats[diff];
+            // Check if there was a previous stat for this difficulty
             if (prevStats[diff]) {
+                // Check if completed increased
                 if (stat.completed > prevStats[diff].completed) {
                     const el = document.getElementById(`score-completed-${diff}`);
+                    // If the element exists, add the flash class - this will highlight the number
+                    // and remove it after 700ms
                     if (el) {
                         el.classList.add("score-flash");
                         setTimeout(() => el.classList.remove("score-flash"), 700);
                     }
                 }
+                // Check if attempts increased
                 if (stat.attempts > prevStats[diff].attempts) {
                     const el = document.getElementById(`score-attempts-${diff}`);
                     if (el) {
+                        // If the element exists, add the flash class - this will highlight the number
+                        // and remove it after 700ms
                         el.classList.add("score-flash");
                         setTimeout(() => el.classList.remove("score-flash"), 700);
                     }
@@ -224,6 +251,7 @@ function updateScoreboard() {
             }
         }
     }
+    // Store the previous stats for comparison next time
     prevStats = JSON.parse(JSON.stringify(mazeStats));
 
     // Scroll to scoreboard if it has content
@@ -245,6 +273,8 @@ function displayVictoryMess(moves) {
 // MAZE GENERATION UTILITIES
 // =========================
 
+// Random number generator and shuffle function
+// Generates a random number between 0 and max (exclusive)
 function rand(max) {
     return Math.floor(Math.random() * max);
 }
