@@ -110,10 +110,39 @@ body {
 
 /* 5. How to play instructions */
 #how-to-play {
-    color: var(--primary-text-color);
+    color: var(--secondary-text-color);
     margin: 1rem 0;
 }
 
+/* Glass effect for the details panel */
+.expandable {
+  /* dark, semi-transparent */
+  background: 
+  /* shiny highlight layer */
+  linear-gradient(120deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.08) 40%, rgba(255,255,255,0.02) 100%),
+  /* dark, semi-transparent glass base */
+  rgba(24, 24, 24, 0.55);
+  border-radius: 16px;
+  border: 1.5px solid rgba(255,255,255,0.12);
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background 0.3s, max-height 0.4s cubic-bezier(.4,0,.2,1);
+  overflow: hidden;
+  cursor: pointer;
+  padding: 1em;
+}
+
+/* Expanded state */
+/* Make the background a bit darker when open */
+.expandable[open] {
+  /* a bit darker when expanded */
+  background: 
+  linear-gradient(120deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.08) 40%, rgba(255,255,255,0.02) 100%),
+  rgba(24, 24, 24, 0.75); 
+}
+
+/* Always show the summary */
 .how-to-summary {
   font-size: 1.1em;
   font-weight: bold;

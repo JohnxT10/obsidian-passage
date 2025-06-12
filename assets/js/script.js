@@ -4,12 +4,10 @@
 // =========================
 // THEME TOGGLE
 // =========================
-console.log("Script loaded!");
 // Light/Dark Mode Toggle
 document.addEventListener("DOMContentLoaded", function() {
     const btn = document.getElementById("theme-toggle");
-    console.log('Theme toggle button:', btn); 
-
+    if (btn) {
     // Set the correct button text on page load
     if (document.body.classList.contains("light-mode")) {
         btn.value = "Dark Mode";
@@ -37,6 +35,80 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     });
+}
+
+
+// =========================
+// USERNAME PROMPT LOGIC & UI CONTROLS
+// =========================
+ 
+const usernameSection = document.getElementById("username-section");
+const usernameInput = document.getElementById("username-input");
+const usernameSubmit = document.getElementById("username-submit");
+
+// Hide game UI initially
+document.getElementById("menu").style.display = "none";
+const timerElem = document.getElementById("timer");
+if (timerElem) timerElem.style.display = "none";
+const viewElem = document.getElementById("view");
+if (viewElem) viewElem.style.display = "none";
+const mobileControls = document.getElementById("mobile-controls");
+if (mobileControls) mobileControls.style.display = "none";
+
+   // Username submit logic
+   usernameSubmit.addEventListener("click", function() {
+    const value = usernameInput.value.trim();
+    if (value.length === 0) {
+        usernameInput.focus();
+        usernameInput.placeholder = "Please enter a username!";
+        usernameInput.classList.add("error");
+        return;
+    }
+    username = value;
+    usernameInput.classList.remove("error");
+    // Hide username section, show game UI
+    usernameSection.style.display = "none";
+    document.getElementById("about-section").style.display = "none";
+    document.getElementById("menu").style.display = "";
+    if (timerElem) timerElem.style.display = "";
+    if (viewElem) viewElem.style.display = "";
+    if (mobileControls) mobileControls.style.display = "";
+});
+
+// Remove error state on input
+usernameInput.addEventListener("input", function() {
+    if (usernameInput.classList.contains("error")) {
+        usernameInput.classList.remove("error");
+        usernameInput.placeholder = "Your username";
+    }
+});
+
+// Allow Enter key to submit
+usernameInput.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+        usernameSubmit.click();
+    }
+});
+
+  // Start button
+  const startBtn = document.getElementById("startMazeBtn");
+  if (startBtn) {
+      startBtn.addEventListener("click", function() {
+          if (mazeActive && timeRemaining > 0) {
+              showRestartMessage(makeMaze);
+          } else {
+              makeMaze();
+          }
+      });
+  }
+
+  const howToPlay = document.getElementById('how-to-play');
+  if (howToPlay) {
+      howToPlay.addEventListener('click', function() {
+          this.classList.toggle('expanded');
+      });
+  }
+
 });
 
 // =========================
@@ -70,6 +142,7 @@ let mazeActive = false;
 // When scoreboad is updated it will compare the current stats to the previous stats
 // to see if any numbers increased, and flash them if they did
 let prevStats = {};
+let username = null;
 
 // =========================
 // TIMER FUNCTIONS
@@ -874,74 +947,7 @@ function makeMaze() {
     // Update scoreboard
     updateScoreboard();
 }
-
-// =========================
-// USERNAME PROMPT LOGIC & UI CONTROLS
-// =========================
-
-let username = null;
-
-document.addEventListener("DOMContentLoaded", function() {
-    // Username logic
-    const usernameSection = document.getElementById("username-section");
-    const usernameInput = document.getElementById("username-input");
-    const usernameSubmit = document.getElementById("username-submit");
-
-    // Hide game UI initially
-    document.getElementById("menu").style.display = "none";
-    const timerElem = document.getElementById("timer");
-    if (timerElem) timerElem.style.display = "none";
-    const viewElem = document.getElementById("view");
-    if (viewElem) viewElem.style.display = "none";
-    const mobileControls = document.getElementById("mobile-controls");
-    if (mobileControls) mobileControls.style.display = "none";
-
-    // Username submit logic
-    usernameSubmit.addEventListener("click", function() {
-        const value = usernameInput.value.trim();
-        if (value.length === 0) {
-            usernameInput.focus();
-            usernameInput.placeholder = "Please enter a username!";
-            usernameInput.classList.add("error");
-            return;
-        }
-        username = value;
-        usernameInput.classList.remove("error");
-        // Hide username section, show game UI
-        usernameSection.style.display = "none";
-        document.getElementById("about-section").style.display = "none";
-        document.getElementById("menu").style.display = "";
-        if (timerElem) timerElem.style.display = "";
-        if (viewElem) viewElem.style.display = "";
-        if (mobileControls) mobileControls.style.display = "";
-    });
-
-    // Remove error state on input
-    usernameInput.addEventListener("input", function() {
-        if (usernameInput.classList.contains("error")) {
-            usernameInput.classList.remove("error");
-            usernameInput.placeholder = "Your username";
-        }
-    });
-
-    // Allow Enter key to submit
-    usernameInput.addEventListener("keydown", function(e) {
-        if (e.key === "Enter") {
-            usernameSubmit.click();
-        }
-    });
-
-    // Start button
-    document.getElementById("startMazeBtn").addEventListener("click", function() {
-        if (mazeActive && timeRemaining > 0) {
-            showRestartMessage(makeMaze);
-        } else {
-            makeMaze();
-        }
-    });
-});
-
-
+   
 // =========================
 // UI CONTROLS & EVENT HANDLERS (outside DOMContentLoaded)
 // =========================
