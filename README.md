@@ -105,11 +105,11 @@ The wireframes are provided below:
 ![Multiview image](assets/images/readme/wireframes/multiview.png)
 
 ### **Individual Wireframes**
-### [Desktop Wireframe](assets/images/readme/wireframes/desktop.png "Desktop wireframe")
+[Desktop Wireframe](assets/images/readme/wireframes/desktop.png "Desktop wireframe")
 
-### [Tablet Wireframe](assets/images/readme/wireframes/tablet.png "Tablet wireframe")
+[Tablet Wireframe](assets/images/readme/wireframes/tablet.png "Tablet wireframe")
 
-### [Phone Wireframe](assets/images/readme/wireframes/phone.png "Phone wireframe")
+[Phone Wireframe](assets/images/readme/wireframes/phone.png "Phone wireframe")
 
 ---
 
@@ -196,8 +196,14 @@ The wireframes are provided below:
 
 ### Fixed Bugs
 
-- Player and Goal image not loading before game start: Disabled the start button until both player and goal images were loaded.
-- Victory message not appearing after maze completion: Fixed event handling to ensure the victory modal always displays when the player reaches the goal.
+- **Fixed:** Player and Goal image not loading before game start.
+**Solution:** Disabled the start button until both player and goal images were loaded.
+- **Fixed:** While maze is active, when toggling between light and dark mode both images would disappear.
+**Solution:** Added code to redraw the maze and player images inside the theme toggle function, so they reappear immediately after switching themes.
+- **Fixed:** Victory message not appearing after maze completion.
+**Solution:** Fixed event handling to ensure the victory modal always displays when the player reaches the goal.
+- **Fixed:** When start button was pressed to restart game the timer would go down faster
+**Solution:** Added clearInterval to remove any previous timer that may be running
 
 ## Unfixed Bugs
 

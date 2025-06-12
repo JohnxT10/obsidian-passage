@@ -67,6 +67,8 @@ let timerInterval = null;
 let mazeActive = false;
 
 // Scoreboard state
+// When scoreboad is updated it will compare the current stats to the previous stats
+// to see if any numbers increased, and flash them if they did
 let prevStats = {};
 
 // =========================
@@ -77,6 +79,7 @@ let prevStats = {};
 function formatTime(seconds) {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
+// Ensure seconds are always two digits
     return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
 
@@ -115,6 +118,7 @@ function startTimer() {
             mazeActive = false;
             showFailureMessage();
         }
+        // 1000 milliseconds = 1 second for the timer
     }, 1000);
 }
 
@@ -185,12 +189,14 @@ function showRestartMessage(onConfirm) {
         <input id="cancelRestartBtn" class="app-btn" type="button" value="Remain in the Shadows">
         </div>
     `;
+    // Makes the message container visible
     document.getElementById('message-container').style.display = 'block';
 
     // Attach event listeners to the buttons
     // Confirm restart button
     document.getElementById("confirmRestartBtn").onclick = function() {
         document.getElementById('message-container').style.display = 'none';
+        // Check if onConfirm is a function and call it to restart the maze
         if (typeof onConfirm === "function") onConfirm();
     };
     // Cancel restart button
@@ -252,6 +258,8 @@ function updateScoreboard() {
         }
     }
     // Store the previous stats for comparison next time
+    // This is a deep copy to avoid reference issues
+    // This ensures that the previous stats are not affected by future changes
     prevStats = JSON.parse(JSON.stringify(mazeStats));
 
     // Scroll to scoreboard if it has content
@@ -273,12 +281,13 @@ function displayVictoryMess(moves) {
 // MAZE GENERATION UTILITIES
 // =========================
 
-// Random number generator and shuffle function
+// Random number generator and shuffle function for maze generation - direction, start and end positions, shuffle directions or paths to make each maze unique
 // Generates a random number between 0 and max (exclusive)
 function rand(max) {
     return Math.floor(Math.random() * max);
 }
   
+// Shuffle function to randomize an array, used for randomizing directions in maze generation
 function shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -296,18 +305,24 @@ function Maze(Width, Height) {
     let mazeMap;
     const width = Width;
     const height = Height;
+    // Start and end coordinates processed later
     let startCoord, endCoord;
+    // Directions for maze generation
     const dirs = ["n", "s", "e", "w"];
     const modDir = {
+        // Object that tells the code how to move in each direction
         n: { y: -1, x: 0, o: "s" },
         s: { y: 1, x: 0, o: "n" },
         e: { y: 0, x: 1, o: "w" },
         w: { y: 0, x: -1, o: "e" }
     };
 
+    // Get the maze map
     this.map = function() {
         return mazeMap;
     };
+
+    // Get the start and end coordinates
     this.startCoord = function() {
         return startCoord;
     };
@@ -315,23 +330,28 @@ function Maze(Width, Height) {
         return endCoord;
     };
 
+
+
     function genMap() {
+         // loops through each row and column of the maze
         mazeMap = new Array(height);
         for (let y = 0; y < height; y++) {
             mazeMap[y] = new Array(width);
-            for (let x = 0; x < width; ++x) {
+        for (let x = 0; x < width; ++x) {
                 mazeMap[y][x] = {
                     n: false,
                     s: false,
                     e: false,
                     w: false,
                     visited: false,
+                    // Each cell has a prior position to backtrack to
                     priorPos: null
                 };
             }
         }
     }
 
+    // Has a path fropm the start to the end
     function defineMaze() {
         // Maze generation state
         let isComp = false;
@@ -344,6 +364,8 @@ function Maze(Width, Height) {
             y: 0
         };
         const numCells = width * height;
+
+
         while (!isComp) {
             move = false;
             mazeMap[pos.x][pos.y].visited = true;
@@ -362,8 +384,11 @@ function Maze(Width, Height) {
                 if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
                     //Check if the tile is already visited
                     if (!mazeMap[nx][ny].visited) {
-                        //Carve through walls from this tile to next
+                        // Carve a path between current cell and new cell
+
+                        // Open wall in current cell
                         mazeMap[pos.x][pos.y][direction] = true;
+                        // Open wall in next cell
                         mazeMap[nx][ny][modDir[direction].o] = true;
 
                         //Set Currentcell as next cells Prior visited
@@ -387,6 +412,7 @@ function Maze(Width, Height) {
                 pos = mazeMap[pos.x][pos.y].priorPos;
             }
             if (numCells == cellsVisited) {
+                // If we've visited all cells, the maze is complete!
                 isComp = true;
             }
         }
@@ -395,18 +421,22 @@ function Maze(Width, Height) {
     function defineStartEnd() {
         switch (rand(4)) {
             case 0:
+                // Maze starts at top left corner and ends at bottom right corner
                 startCoord = { x: 0, y: 0 };
                 endCoord = { x: height - 1, y: width - 1 };
                 break;
             case 1:
+                // Maze starts at top right corner and ends at bottom left corner
                 startCoord = { x: 0, y: width - 1 };
                 endCoord = { x: height - 1, y: 0 };
                 break;
             case 2:
+                // Maze starts at bottom left corner and ends at top right corner
                 startCoord = { x: height - 1, y: 0 };
                 endCoord = { x: 0, y: width - 1 };
                 break;
             case 3:
+                // Maze starts at bottom right corner and ends at top left corner
                 startCoord = { x: height - 1, y: width - 1 };
                 endCoord = { x: 0, y: 0 };
                 break;
@@ -429,11 +459,15 @@ function getWallColor() {
   
 function DrawMaze(Maze, ctx, cellsize = null) {
     // Maze drawing logic
+    // Maze layout and cell size
     const map = Maze.map();
     let cellSize = cellsize;
+    // Drawing the goal
     let drawEndMethod;
+    // Sets the thickness of the walls
     ctx.lineWidth = cellSize / 40;
 
+    //  For redrawing the maze e.g toggling dark mode or resizing the canvas
     this.redrawMaze = function(size) {
         cellSize = size;
         ctx.lineWidth = cellSize / 50;
@@ -443,6 +477,8 @@ function DrawMaze(Maze, ctx, cellsize = null) {
         drawEndMethod();
     };
 
+    // Draws a single cell with its walls
+    // xCord and yCord are the coordinates of the cell in the maze
     function drawCell(xCord, yCord, cell) {
         const x = xCord * cellSize;
         const y = yCord * cellSize;
@@ -450,7 +486,7 @@ function DrawMaze(Maze, ctx, cellsize = null) {
         ctx.lineWidth = 2;
 
         //   North wall
-        if (cell.n == false) {
+        if (cell.n === false) {
             ctx.save();
             // Only add shadow for easy and medium difficulties
             if (parseInt(difficulty) === 10 || parseInt(difficulty) === 15) {
@@ -518,6 +554,7 @@ function DrawMaze(Maze, ctx, cellsize = null) {
                 ctx.shadowColor = "rgba(0,0,0,0)";
                 ctx.shadowBlur = 0;
             }
+        
             ctx.beginPath();
             ctx.moveTo(x + cellSize, y);
             ctx.lineTo(x + cellSize, y + cellSize);
@@ -551,6 +588,7 @@ function DrawMaze(Maze, ctx, cellsize = null) {
         }
     }
 
+    // Loops through every cell in the maze and calls drawCell to draw its walls.
     function drawMap() {
         ctx.strokeStyle = getWallColor(); 
         for (let x = 0; x < map.length; x++) {
@@ -601,7 +639,6 @@ goalImg.src = "assets/images/main/goal.png";
 let imagesLoaded = 0;
 playerImg.onload = goalImg.onload = function() {
     imagesLoaded++;
-    console.log('Image loaded, count:', imagesLoaded);
     if (imagesLoaded === 2) {
         document.getElementById("startMazeBtn").disabled = false;
     }
@@ -610,24 +647,29 @@ playerImg.onload = goalImg.onload = function() {
 function Player(maze, c, _cellsize, onComplete, sprite = null) {
     // Player logic
     const ctx = c.getContext("2d");
-    // Use the player image if provided, otherwise use the default player image
+    // Use the player image if provided.
     const drawSprite = drawSpriteImage; 
     let moves = 0;
     const player = this;
+    // Get the maze layout
     const map = maze.map();
     let cellCoords = {
         x: maze.startCoord().x,
         y: maze.startCoord().y
     };
+    // Size of each cell
     let cellSize = _cellsize;
+    // Half the cell size for centering the player sprite
     let halfCellSize = cellSize / 2;
 
+     // Redraws the player at the current position and size
     this.redrawPlayer = function(_cellsize) {
         cellSize = _cellsize;
         halfCellSize = cellSize / 2;
         drawSprite(cellCoords);
     };
 
+    // Draws the player sprite at the current coordinates
     function drawSpriteImage(coord) {
         // Draw a white shadow/outline
         ctx.save();
@@ -641,13 +683,17 @@ function Player(maze, c, _cellsize, onComplete, sprite = null) {
             cellSize
         );
         ctx.restore();
+
         // Check if the player has reached the end of the maze
         if (coord.x === maze.endCoord().x && coord.y === maze.endCoord().y) {
+            // Stop the timer when the player reaches the end
             onComplete(moves);
+            // Stop listening for key events when the maze is completed
             player.unbindKeyDown();
         }
     }
 
+    // Handles keyboard input for moving the player
     function check(e) {
         // Prevent arrow keys from scrolling the page
         if ([37, 38, 39, 40].includes(e.keyCode)) {
@@ -655,47 +701,64 @@ function Player(maze, c, _cellsize, onComplete, sprite = null) {
         }
         const cell = map[cellCoords.x][cellCoords.y];
         moves++;
+
+        // Move the player if there is an open wall in that direction
         switch (e.keyCode) {
+            // 'A' key
             case 65:
-            case 37: // west
+            // Left arrow
+            case 37: 
                 if (cell.w == true) {
                     cellCoords = { x: cellCoords.x - 1, y: cellCoords.y };
                 }
                 break;
+                // 'W' key
             case 87:
-            case 38: // north
+            // Up arrow
+            case 38:
                 if (cell.n == true) {
                     cellCoords = { x: cellCoords.x, y: cellCoords.y - 1 };
                 }
                 break;
+            // 'D' key
             case 68:
-            case 39: // east
+            // Right arrow
+            case 39: 
                 if (cell.e == true) {
                     cellCoords = { x: cellCoords.x + 1, y: cellCoords.y };
                 }
                 break;
+            // 'S' key
             case 83:
+            // Down arrow
             case 40: // south
                 if (cell.s == true) {
                     cellCoords = { x: cellCoords.x, y: cellCoords.y + 1 };
                 }
                 break;
         }
+
+        // Redraw the maze (to clear old player image)
         draw.redrawMaze(cellSize);
+        // Draw the player at the new position
         drawSprite(cellCoords);
     }
 
     this.check = check;
 
+    // Listen for keyboard events to move the player
     this.bindKeyDown = function() {
         window.addEventListener("keydown", check, false);
     };
 
+     // Stop listening for keyboard events
     this.unbindKeyDown = function() {
         window.removeEventListener("keydown", check, false);
     };
 
+    // Draw the player at the start
     drawSprite(maze.startCoord());
+    // Start listening for key presses
     this.bindKeyDown();
 }
 
@@ -703,6 +766,7 @@ function Player(maze, c, _cellsize, onComplete, sprite = null) {
 // CANVAS & GAME INITIALIZATION
 // =========================
 
+// Get the canvas and context for drawing the maze (draw shapes, lines, images, etc.).
 const mazeCanvas = document.getElementById("mazeCanvas");
 const ctx = mazeCanvas.getContext("2d");
 let maze, draw, player;
@@ -721,6 +785,7 @@ function resizeMazeCanvas() {
     const displaySize = Math.min(container.clientWidth, window.innerHeight * 0.6, maxSize);
 
     // Set the canvas pixel size for sharpness
+    // Multiply by device pixel ratio for high-DPI screens
     canvas.width = displaySize * dpr;
     canvas.height = displaySize * dpr;
 
@@ -730,8 +795,9 @@ function resizeMazeCanvas() {
 
     // Scale the context for high-DPI screens
     const ctx = canvas.getContext('2d');
-    // reset
+    // reset any previous scaling or transformations on the canvas
     ctx.setTransform(1, 0, 0, 1, 0, 0); 
+    // Scale the context to match the device pixel ratio
     ctx.scale(dpr, dpr);
 
        // --- Fix: recalculate cellSize based on new canvas size and difficulty ---
@@ -748,6 +814,7 @@ function resizeMazeCanvas() {
     }
 }
 
+// Resize the maze canvas on page load and window resize
 window.onload = function() {
     resizeMazeCanvas();
 };
@@ -775,11 +842,14 @@ function getTimeLimitForDifficulty(difficulty) {
     }
 }
   
+// This starts the new maze
 function makeMaze() {
     if (player != undefined) {
         player.unbindKeyDown();
+        // Removes old player image from the canvas
         player = null;
     }
+
     // Ensure canvas is sharp and sized correctly
     resizeMazeCanvas();
 
