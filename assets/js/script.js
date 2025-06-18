@@ -370,7 +370,7 @@ function shuffle(a) {
 }
 
 // =========================
-// MAZE CLASS
+// MAZE CLASS LOGIC
 // =========================
 
 function Maze(Width, Height) {
