@@ -390,6 +390,29 @@ function Maze(Width, Height) {
         w: { y: 0, x: -1, o: "e" }
     };
 
+
+    // Randomly choose a starting point for the DFS algorithm
+    let dfsStart;
+    switch (rand(4)) {
+        case 0:
+            // top-left corner
+            dfsStart = { x: 0, y: 0 };
+            break;
+        case 1:
+            // top-right corner
+            dfsStart = { x: 0, y: width - 1 };
+            break;
+        case 2:
+            // bottom-left corner
+            dfsStart = { x: height - 1, y: 0 };
+            break;
+        case 3:
+            // bottom-right corner
+            dfsStart = { x: height - 1, y: width - 1 };
+            break;
+    }
+
+
     // Get the maze map
     this.map = function() {
         return mazeMap;
@@ -406,71 +429,78 @@ function Maze(Width, Height) {
 
 
     function genMap() {
+        // Create a 2D array for the maze
          // loops through each row and column of the maze
         mazeMap = new Array(height);
         for (let y = 0; y < height; y++) {
             mazeMap[y] = new Array(width);
         for (let x = 0; x < width; ++x) {
                 mazeMap[y][x] = {
+                    // North, South, East, West walls are unvisited by default
                     n: false,
                     s: false,
                     e: false,
                     w: false,
                     visited: false,
-                    // Each cell has a prior position to backtrack to
+                    // Each cell has a prior position to backtrack to for DFS
                     priorPos: null
                 };
             }
         }
     }
 
-    // Has a path fropm the start to the end
+    // Has a path from the start to the end
     function defineMaze() {
         // Maze generation state
+        // Is the maze complete?
         let isComp = false;
+        // Did we move to a new cell this loop?
         let move = false;
+        // How many cells have we visited?
         let cellsVisited = 1;
+        // How many times have we looped in this cell?
         let numLoops = 0;
+         // How many times should we loop before shuffling directions?
         let maxLoops = 0;
-        let pos = {
-            x: 0,
-            y: 0
-        };
+        // DFS random starting position
+        let pos = { ...dfsStart };
+        // Mark current cell as visited
         const numCells = width * height;
 
-
+        // Main loop for maze generation
         while (!isComp) {
             move = false;
             mazeMap[pos.x][pos.y].visited = true;
 
+            // Occasionally shuffle the directions to randomize the maze
             if (numLoops >= maxLoops) {
                 shuffle(dirs);
                 maxLoops = Math.round(rand(height / 8));
                 numLoops = 0;
             }
             numLoops++;
+
+            // Try each direction (n, s, e, w) in random order
             for (let index = 0; index < dirs.length; index++) {
                 const direction = dirs[index];
                 const nx = pos.x + modDir[direction].x;
                 const ny = pos.y + modDir[direction].y;
 
+
+                // Check if the neighbor is inside the maze bounds
                 if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
-                    //Check if the tile is already visited
+                    // If the neighbor hasn't been visited yet
                     if (!mazeMap[nx][ny].visited) {
                         // Carve a path between current cell and new cell
-
                         // Open wall in current cell
                         mazeMap[pos.x][pos.y][direction] = true;
                         // Open wall in next cell
                         mazeMap[nx][ny][modDir[direction].o] = true;
 
-                        //Set Currentcell as next cells Prior visited
+                        // Remember where we came from (for backtracking)
                         mazeMap[nx][ny].priorPos = pos;
-                        //Update Cell position to newly visited location
-                        pos = {
-                            x: nx,
-                            y: ny
-                        };
+                        // Move to the neighbor cell
+                        pos = { x: nx, y: ny };
                         cellsVisited++;
                         //Recursively call this method on the next tile
                         move = true;
@@ -491,6 +521,7 @@ function Maze(Width, Height) {
         }
     }
 
+    // Define the start and end coordinates of the maze
     function defineStartEnd() {
         switch (rand(4)) {
             case 0:
